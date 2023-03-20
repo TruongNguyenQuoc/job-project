@@ -2,8 +2,6 @@ package com.example.restapi.controller;
 
 import com.example.restapi.config.jwt.JWTAuthenticationRequest;
 import com.example.restapi.config.jwt.JWTService;
-import com.example.restapi.model.entity.Account;
-import com.example.restapi.service.AccountService;
 import com.example.restapi.validator.ExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,9 +21,6 @@ public class JWTAuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private AccountService accountService;
 
     @PostMapping
     public String getTokenForAuthenticatedUser(@RequestBody JWTAuthenticationRequest authenticationRequest){
