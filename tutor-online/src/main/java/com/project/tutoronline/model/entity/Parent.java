@@ -3,15 +3,17 @@ package com.project.tutoronline.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "parent")
 public class Parent extends BaseEntity {
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Column(name = "fullName")
     private String fullName;

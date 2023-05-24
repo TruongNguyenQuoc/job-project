@@ -3,15 +3,18 @@ package com.project.tutoronline.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tutor")
 public class Tutor extends BaseEntity {
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Column(name = "fullName")
     private String fullName;
@@ -26,7 +29,7 @@ public class Tutor extends BaseEntity {
     private String address;
 
     @Column(name = "birthday")
-    private int birthday;
+    private Date birthday;
 
     @Column(name = "origin")
     private String origin;

@@ -13,7 +13,7 @@ public class TutorDTO {
     private String phone;
     private String avatar;
     private String address;
-    private int birthday;
+    private String birthday;
     private String origin;
     private String idNumber;
     private String idPhoto;
@@ -28,5 +28,7 @@ public class TutorDTO {
 
     private MultipartFile avatarMul;
 
+    private AccountDTO accountDTO;
+    private long accountId;
 
 }

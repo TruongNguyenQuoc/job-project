@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import java.util.regex.Pattern;
 
 @Component
 public class ValidatorUtil {
+
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###,###,###");
 
     public static HashMap<String, String> toErrors(List<FieldError> fieldErrors) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -73,6 +76,24 @@ public class ValidatorUtil {
             }
         }
         return result;
+    }
+
+    public static String formatNumber(double value) {
+        try {
+            String result = DECIMAL_FORMAT.format(value);
+            return result.startsWith(".") ? "0" + result : result;
+        } catch (Exception ex) {
+            return "";
+        }
+    }
+
+    public static double formatNumber(String value) {
+        try {
+            String target = value.replaceAll(",", "").trim();
+            return Double.parseDouble(target);
+        } catch (Exception ex) {
+            return 0.0;
+        }
     }
 
 }

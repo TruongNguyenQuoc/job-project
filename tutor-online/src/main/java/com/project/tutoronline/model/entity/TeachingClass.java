@@ -17,6 +17,6 @@ public class TeachingClass extends BaseEntity {
     private String name;
 
     @Column(name = "status")
-    private String status;
+    private boolean status;
 
 }

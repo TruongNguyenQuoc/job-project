@@ -16,12 +16,6 @@ public class AccountDTO {
 
     private RoleDTO roleDTO;
 
-    private ParentDTO parentDTO;
-    private long parentId;
-
-    private TutorDTO tutorDTO;
-    private long tutorId;
-
     private String oldPassword;
     private String newPassword;
     private String confirmPassword;

@@ -18,14 +18,6 @@ public class Account extends BaseEntity implements Serializable {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "parent_id")
-    private Parent parent;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "tutor_id")
-    private Tutor tutor;
-
     @Column(name = "username")
     private String username;
 

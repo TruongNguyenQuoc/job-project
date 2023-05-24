@@ -9,6 +9,6 @@ public class TeachingClassDTO {
 
     private long id;
     private String name;
-    private String status;
+    private boolean status;
 
 }
