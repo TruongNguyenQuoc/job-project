@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="sidebar">
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="" class="brand-link">
+            <img th:src="@{/resources/dist/img/AdminLTELogo.png}" alt="Doctor Online"
+                 class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Doctor Online</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info">
+                    <a>Xin chào, [[${#request.remoteUser}]]</a>
+                    <a href="/logout" class="d-block">Đăng Xuất</a>
+                </div>
+            </div>
+
+            <!-- SidebarSearch Form -->
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                           aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item">
+                        <a href="/back/dashboard"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/dashboard') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>Tổng Quan</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-header">Quản Lý</li>
+                    <li class="nav-item">
+                        <a href="/back/account"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/account') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Tài Khoản</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/back/parent"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/parent') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>Phụ Huynh</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/back/tutor"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/tutor') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>Gia Sư</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/back/teaching-class"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/teaching-class') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-chalkboard"></i>
+                            <p>Lớp Dạy</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/back/time-teaching"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/time-teaching') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon far fa-clock"></i>
+                            <p>Thời Gian Dạy</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/back/course"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/course') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-book-reader"></i>
+                            <p>Môn Học</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-header">Thiết Lập</li>
+                    <li class="nav-item">
+                        <a href="/change-password"
+                           th:class="${#httpServletRequest.requestURI.contains('/change-password') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-unlock-alt"></i>
+                            <p>Đổi Mật Khẩu</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+</div>
+</body>
+
+</html>

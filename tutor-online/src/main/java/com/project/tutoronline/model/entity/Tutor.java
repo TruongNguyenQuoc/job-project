@@ -58,9 +58,6 @@ public class Tutor extends BaseEntity {
     @Column(name = "level")
     private String level;
 
-    @Column(name = "teaching_class_id")
-    private String teachingClass;
-
     @Column(name = "status")
     private boolean status;
 

@@ -10,6 +10,8 @@ public interface TeachingClassService {
 
     TeachingClass findById(long id);
 
+    TeachingClass findByName(String name);
+
     TeachingClass save(TeachingClass teachingClass);
     
 }
