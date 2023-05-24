@@ -1,11 +1,12 @@
 package com.project.tutoronline.repository;
 
-import com.project.tutoronline.model.entity.Role;
+import com.project.tutoronline.model.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    Role findByName(String name);
+    Course findByName(String name);
+
 }

@@ -42,7 +42,6 @@ public class TutorMapperImpl implements TutorMapper {
         tutorDTO.setSpecialization(tutor.getSpecialization());
         tutorDTO.setYearCollege(tutor.getYearCollege());
         tutorDTO.setLevel(tutor.getLevel());
-        tutorDTO.setTeachingClass(tutor.getTeachingClass());
         tutorDTO.setStatus(tutor.isStatus());
 
 
@@ -86,7 +85,6 @@ public class TutorMapperImpl implements TutorMapper {
         tutor.setSpecialization(tutorDTO.getSpecialization());
         tutor.setYearCollege(tutorDTO.getYearCollege());
         tutor.setLevel(tutorDTO.getLevel());
-        tutor.setTeachingClass(tutorDTO.getTeachingClass());
         tutor.setStatus(tutorDTO.isStatus());
 
         return tutor;

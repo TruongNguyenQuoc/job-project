@@ -25,6 +25,11 @@ public class TeachingClassServiceImpl implements TeachingClassService {
     }
 
     @Override
+    public TeachingClass findByName(String name) {
+        return teachingClassRepository.findByName(name);
+    }
+
+    @Override
     public TeachingClass save(TeachingClass teachingClass) {
         return teachingClassRepository.save(teachingClass);
     }
