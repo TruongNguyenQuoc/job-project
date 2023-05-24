@@ -1,10 +1,8 @@
 package com.project.tutoronline.model.mapper.impl;
 
 import com.project.tutoronline.model.dto.AccountDTO;
-import com.project.tutoronline.model.dto.ParentDTO;
 import com.project.tutoronline.model.dto.RoleDTO;
 import com.project.tutoronline.model.entity.Account;
-import com.project.tutoronline.model.entity.Parent;
 import com.project.tutoronline.model.entity.Role;
 import com.project.tutoronline.model.mapper.AccountMapper;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,6 @@ import java.util.List;
 
 @Component
 public class AccountMapperImpl implements AccountMapper {
-
 
     @Override
     public AccountDTO toDTO(Account account) {
@@ -38,20 +35,8 @@ public class AccountMapperImpl implements AccountMapper {
             roleDTO.setName(role.getName());
             roleDTO.setStatus(role.isStatus());
         }
+        accountDTO.setRole(roleDTO.getName());
         accountDTO.setRoleDTO(roleDTO);
-
-        ParentDTO parentDTO = new ParentDTO();
-        Parent parent = account.getParent();
-        if (parent != null) {
-            parentDTO.setId(parent.getId());
-            parentDTO.setFullName(parent.getFullName());
-            parentDTO.setPhone(parent.getPhone());
-            parentDTO.setAvatar(parent.getAvatar());
-            parentDTO.setAddress(parent.getAddress());
-            parentDTO.setStatus(parent.isStatus());
-            accountDTO.setParentId(parent.getId());
-        }
-        accountDTO.setParentDTO(parentDTO);
 
         return accountDTO;
     }

@@ -17,6 +17,9 @@ public class PostDTO {
     private String mode;
     private boolean status;
 
+    private long accountId;
+    private AccountDTO accountDTO;
+
     private long timeTeachingId;
     private TimeTeachingDTO timeTeachingDTO;
 

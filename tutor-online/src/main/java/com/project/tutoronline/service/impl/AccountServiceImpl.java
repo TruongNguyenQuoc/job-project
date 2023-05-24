@@ -86,11 +86,6 @@ public class AccountServiceImpl implements AccountService {
         // role
         Role role = roleService.findByName(accountDTO.getRole());
         account.setRole(role);
-        switch (accountDTO.getRole().toUpperCase()) {
-            case "TUTOR":
-
-            case "PARENT":
-        }
 
         // account
         account.setId(accountDTO.getId());

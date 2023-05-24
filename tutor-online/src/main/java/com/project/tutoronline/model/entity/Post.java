@@ -18,10 +18,10 @@ public class Post extends BaseEntity {
     private String address;
 
     @Column(name = "price")
-    private String price;
+    private double price;
 
     @Column(name = "number_of_session")
-    private String numberOfSession;
+    private int numberOfSession;
 
     @Column(name = "information")
     private String information;

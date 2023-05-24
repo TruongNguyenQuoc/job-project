@@ -19,4 +19,7 @@ public class ParentDTO {
 
     private boolean status;
 
+    private AccountDTO accountDTO;
+    private long accountId;
+
 }
