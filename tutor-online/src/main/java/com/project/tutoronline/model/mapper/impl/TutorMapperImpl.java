@@ -78,9 +78,11 @@ public class TutorMapperImpl implements TutorMapper {
         tutor.setBirthday(DateUtil.convertStringToDate(tutorDTO.getBirthday(), "dd-MM-yyyy"));
         tutor.setOrigin(tutorDTO.getOrigin());
         tutor.setIdNumber(tutorDTO.getIdNumber());
-        tutor.setIdPhoto(tutorDTO.getIdPhoto());
-        tutor.setCardPhoto(tutorDTO.getCardPhoto());
-        tutor.setDegreePhoto(tutorDTO.getDegreePhoto());
+
+//        tutor.setIdPhoto(tutorDTO.getIdPhoto());
+//        tutor.setCardPhoto(tutorDTO.getCardPhoto());
+//        tutor.setDegreePhoto(tutorDTO.getDegreePhoto());
+
         tutor.setSchool(tutorDTO.getSchool());
         tutor.setSpecialization(tutorDTO.getSpecialization());
         tutor.setYearCollege(tutorDTO.getYearCollege());

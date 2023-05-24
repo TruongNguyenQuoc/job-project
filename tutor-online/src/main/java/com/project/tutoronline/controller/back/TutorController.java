@@ -2,15 +2,21 @@ package com.project.tutoronline.controller.back;
 
 import com.project.tutoronline.model.dto.MessageDTO;
 import com.project.tutoronline.model.dto.TutorDTO;
+import com.project.tutoronline.model.entity.TeachingClass;
 import com.project.tutoronline.model.entity.Tutor;
+import com.project.tutoronline.model.entity.TutorTeachingClass;
+import com.project.tutoronline.model.mapper.TeachingClassMapper;
 import com.project.tutoronline.model.mapper.TutorMapper;
+import com.project.tutoronline.service.TeachingClassService;
 import com.project.tutoronline.service.TutorService;
+import com.project.tutoronline.service.TutorTeachingClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,6 +30,15 @@ public class TutorController {
 
     @Autowired
     private TutorMapper tutorMapper;
+
+    @Autowired
+    private TeachingClassService teachingClassService;
+
+    @Autowired
+    private TutorTeachingClassService tutorTeachingClassService;
+
+    @Autowired
+    private TeachingClassMapper teachingClassMapper;
 
     @GetMapping(value = {"", "/"})
     public String list(Model model) {
@@ -41,10 +56,19 @@ public class TutorController {
                        @RequestParam(required = false) String action,
                        @RequestParam(required = false) String status) {
         try {
-            TutorDTO tutorDTO = tutorMapper.toDTO(tutorService.findById(id));
-            if (tutorDTO == null) {
+            Tutor tutor = tutorService.findById(id);
+            if (tutor == null) {
                 return "redirect:" + REDIRECT_URL;
             }
+            List<TeachingClass> teachingClassList = teachingClassService.findAll();
+            List<TutorTeachingClass> tutorTeachingClassList = tutorTeachingClassService.findByTutor(tutor);
+
+            List<String> teachingClassIdList = new ArrayList<>();
+            tutorTeachingClassList.forEach(
+                    element -> {
+                        teachingClassIdList.add(String.valueOf(element.getTeachingClass().getId()));
+                    }
+            );
 
             if (action != null) {
                 model.addAttribute("status", "warning");
@@ -58,8 +82,11 @@ public class TutorController {
                 model.addAttribute("status", "success");
             }
 
+            TutorDTO tutorDTO = tutorMapper.toDTO(tutor);
+            tutorDTO.setTeachingClassIdList(teachingClassIdList);
             model.addAttribute("tutorDTO", tutorDTO);
-
+            model.addAttribute("accountDTO", tutorDTO.getAccountDTO());
+            model.addAttribute("teachingClassDTOList", teachingClassMapper.toListDTO(teachingClassList));
             return "back/tutor_form";
         } catch (Exception ex) {
             return "redirect:" + REDIRECT_URL;
