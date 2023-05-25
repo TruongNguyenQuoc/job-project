@@ -3,9 +3,11 @@ package com.project.tutoronline.model.mapper.impl;
 import com.project.tutoronline.model.dto.AccountDTO;
 import com.project.tutoronline.model.dto.TutorDTO;
 import com.project.tutoronline.model.entity.Tutor;
+import com.project.tutoronline.model.entity.TutorTeachingClass;
 import com.project.tutoronline.model.mapper.AccountMapper;
 import com.project.tutoronline.model.mapper.TutorMapper;
 import com.project.tutoronline.service.TutorService;
+import com.project.tutoronline.service.TutorTeachingClassService;
 import com.project.tutoronline.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,13 +24,15 @@ public class TutorMapperImpl implements TutorMapper {
     @Autowired
     private TutorService tutorService;
 
+    @Autowired
+    private TutorTeachingClassService tutorTeachingClassService;
+
     @Override
     public TutorDTO toDTO(Tutor tutor) {
         if(tutor == null) return null;
 
         TutorDTO tutorDTO = new TutorDTO();
         tutorDTO.setId(tutor.getId());
-        tutorDTO.setFullName(tutor.getFullName());
         tutorDTO.setPhone(tutor.getPhone());
         tutorDTO.setAvatar(tutor.getAvatar());
         tutorDTO.setAddress(tutor.getAddress());
@@ -44,12 +48,20 @@ public class TutorMapperImpl implements TutorMapper {
         tutorDTO.setLevel(tutor.getLevel());
         tutorDTO.setStatus(tutor.isStatus());
 
-
         if (tutor.getAccount() != null) {
             AccountDTO accountDTO = accountMapper.toDTO(tutor.getAccount());
             tutorDTO.setAccountDTO(accountDTO);
             tutorDTO.setAccountId(tutor.getAccount().getId());
         }
+
+        List<TutorTeachingClass> tutorTeachingClassList = tutorTeachingClassService.findByTutor(tutor);
+        List<String> teachingClassIdList = new ArrayList<>();
+        tutorTeachingClassList.forEach(
+                element -> {
+                    teachingClassIdList.add(String.valueOf(element.getTeachingClass().getId()));
+                }
+        );
+        tutorDTO.setTeachingClassIdList(teachingClassIdList);
 
         return tutorDTO;
     }
@@ -71,7 +83,6 @@ public class TutorMapperImpl implements TutorMapper {
         Tutor tutor = tutorService.findById(tutorDTO.getId());
         if (tutor == null) tutor = new Tutor();
 
-        tutor.setFullName(tutorDTO.getFullName());
         tutor.setPhone(tutorDTO.getPhone());
         tutor.setAvatar(tutorDTO.getAvatar());
         tutor.setAddress(tutorDTO.getAddress());

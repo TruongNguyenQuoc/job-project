@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gia Sư | Tutor Online</title>
+    <title>Phụ Huynh | Tutor Online</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -50,7 +50,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/back/dashboard">Trang Chủ</a></li>
                             <li class="breadcrumb-item">Quản lý</li>
-                            <li class="breadcrumb-item active">Gia Sư</li>
+                            <li class="breadcrumb-item active">Phụ Huynh</li>
                         </ol>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh Sách Gia Sư</h3>
+                                <h3 class="card-title">Danh Sách Phụ Huynh</h3>
                             </div>
                             <div class="card-body">
                                 <table id="tableview" class="table table-bordered table-striped">
@@ -71,32 +71,28 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Họ & Tên</th>
-                                        <th>Số Điện Thoại</th>
-                                        <th>Trường Đào Tạo</th>
-                                        <th>Trình Độ</th>
+                                        <th>Địa Chỉ</th>
                                         <th style="width: 100px">Trạng Thái</th>
                                         <th style="width: 120px">Tùy Chọn</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="item : ${tutorList}">
+                                    <tr th:each="item : ${parentList}">
                                         <td th:text="${'#' + item.id}"></td>
                                         <td th:text="${item.accountDTO.fullName}"></td>
-                                        <td th:text="${item.phone}"></td>
-                                        <td th:text="${item.school}"></td>
-                                        <td th:text="${item.level}"></td>
+                                        <td th:text="${item.address}"></td>
                                         <td th:switch="${item.status}" class="text-center">
                                             <p class="badge badge-success" th:case="true">Kích Hoạt</p>
                                             <p class="badge badge-danger" th:case="false">Tạm Ngưng</p>
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-sm"
-                                               th:href="@{'/back/tutor/form/' + ${item.id}}">
+                                               th:href="@{'/back/parent/form/' + ${item.id}}">
                                                 <i class="fas fa-eye"></i>
                                                 Xem
                                             </a>
                                             <a class="btn btn-danger btn-sm"
-                                               th:href="@{'/back/tutor/delete/' + ${item.id}}">
+                                               th:href="@{'/back/parent/delete/' + ${item.id}}">
                                                 <i class="fa fa-trash"></i>
                                                 Xóa
                                             </a>
@@ -107,9 +103,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Họ & Tên</th>
-                                        <th>Số Điện Thoại</th>
-                                        <th>Trường Đào Tạo</th>
-                                        <th>Trình Độ</th>
+                                        <th>Địa Chỉ</th>
                                         <th style="width: 100px">Trạng Thái</th>
                                         <th style="width: 120px">Tùy Chọn</th>
                                     </tr>

@@ -25,11 +25,6 @@ public class ParentServiceImpl implements ParentService {
     }
 
     @Override
-    public List<Parent> findByFullName(String fullName) {
-        return parentRepository.findByFullName(fullName);
-    }
-
-    @Override
     public Parent save(Parent parent) {
         return parentRepository.save(parent);
     }

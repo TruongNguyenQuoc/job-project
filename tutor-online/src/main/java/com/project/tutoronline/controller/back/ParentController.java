@@ -1,11 +1,10 @@
 package com.project.tutoronline.controller.back;
 
 import com.project.tutoronline.model.dto.MessageDTO;
-import com.project.tutoronline.model.dto.TeachingClassDTO;
-import com.project.tutoronline.model.entity.TeachingClass;
-import com.project.tutoronline.model.mapper.TeachingClassMapper;
-import com.project.tutoronline.service.TeachingClassService;
-import com.project.tutoronline.validator.TeachingClassValidator;
+import com.project.tutoronline.model.dto.ParentDTO;
+import com.project.tutoronline.model.entity.Parent;
+import com.project.tutoronline.model.mapper.ParentMapper;
+import com.project.tutoronline.service.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,25 +14,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/back/teaching-class")
-public class TeachingClassController {
+@RequestMapping("/back/parent")
+public class ParentController {
 
-    private static final String REDIRECT_URL = "/back/teaching-class";
-
-    @Autowired
-    private TeachingClassService teachingClassService;
-    @Autowired
-    private TeachingClassValidator teachingClassValidator;
+    private static final String REDIRECT_URL = "/back/parent";
 
     @Autowired
-    private TeachingClassMapper teachingClassMapper;
+    private ParentService parentService;
+
+    @Autowired
+    private ParentMapper parentMapper;
 
     @GetMapping(value = {"", "/"})
     public String list(Model model) {
         try {
-            List<TeachingClass> teachingClassList = teachingClassService.findAll();
-            model.addAttribute("teachingClassList", teachingClassMapper.toListDTO(teachingClassList));
-            return "back/teaching_class_list";
+            List<Parent> parentList = parentService.findAll();
+            model.addAttribute("parentList", parentMapper.toListDTO(parentList));
+            return "back/parent_list";
         } catch (Exception ex) {
             return "redirect:" + REDIRECT_URL;
         }
@@ -43,8 +40,8 @@ public class TeachingClassController {
     public String form(Model model) {
         try {
             model.addAttribute("messageDTO", null);
-            model.addAttribute("teachingClassDTO", new TeachingClassDTO());
-            return "back/teaching_class_form";
+            model.addAttribute("parentDTO", new ParentDTO());
+            return "back/parent_form";
         } catch (Exception ex) {
             return "redirect:" + REDIRECT_URL;
         }
@@ -55,8 +52,8 @@ public class TeachingClassController {
                        @RequestParam(required = false) String action,
                        @RequestParam(required = false) String status) {
         try {
-            TeachingClassDTO teachingClassDTO = teachingClassMapper.toDTO(teachingClassService.findById(id));
-            if (teachingClassDTO == null) {
+            ParentDTO parentDTO = parentMapper.toDTO(parentService.findById(id));
+            if (parentDTO == null) {
                 return "redirect:" + REDIRECT_URL;
             }
 
@@ -72,33 +69,31 @@ public class TeachingClassController {
                 model.addAttribute("status", "success");
             }
 
-            model.addAttribute("teachingClassDTO", teachingClassDTO);
+            model.addAttribute("parentDTO", parentDTO);
 
-            return "back/teaching_class_form";
+            return "back/parent_form";
         } catch (Exception ex) {
             return "redirect:" + REDIRECT_URL;
         }
     }
 
     @PostMapping(value = "/form")
-    public String save(Model model, TeachingClassDTO teachingClassDTO, BindingResult bindingResult) {
+    public String save(Model model, ParentDTO parentDTO, BindingResult bindingResult) {
         try {
             String redirectUrl = "";
-            // validate
-            teachingClassValidator.validate(teachingClassDTO, bindingResult);
 
             if (bindingResult.hasErrors()) {
                 model.addAttribute("status", "warning");
                 model.addAttribute("messageDTO", new MessageDTO("save",
                         "Vui lòng kiểm tra lại thông tin!"));
-                return "back/teaching_class_form";
+                return "back/parent_form";
             } else {
                 // save
-                TeachingClass teachingClass = teachingClassService.save(teachingClassMapper.toEntity(teachingClassDTO));
-                if (teachingClass != null) {
-                    redirectUrl = "/back/teaching-class/form/" + teachingClass.getId() + "?action=save&status=success";
+                Parent parent = parentService.save(parentMapper.toEntity(parentDTO));
+                if (parent != null) {
+                    redirectUrl = "/back/parent/form/" + parent.getId() + "?action=save&status=success";
                 } else {
-                    redirectUrl = "/back/teaching-class/form/" + "?action=error";
+                    redirectUrl = "/back/parent/form/" + "?action=error";
                 }
 
                 return "redirect:" + redirectUrl;
@@ -110,9 +105,9 @@ public class TeachingClassController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id) {
-        TeachingClass teachingClass = teachingClassService.findById(id);
-        teachingClass.setStatus(false);
-        teachingClassService.save(teachingClass);
+        Parent parent = parentService.findById(id);
+        parent.setStatus(false);
+        parentService.save(parent);
         return "redirect:" + REDIRECT_URL;
     }
 

@@ -11,8 +11,20 @@ import javax.persistence.*;
 @Table(name = "post")
 public class Post extends BaseEntity {
 
-    @Column(name = "subject")
-    private String subject;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "teaching_class_id")
+    private TeachingClass teachingClass;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @Column(name = "fullName")
+    private String fullName;
 
     @Column(name = "address")
     private String address;
@@ -31,18 +43,6 @@ public class Post extends BaseEntity {
 
     @Column(name = "mode")
     private String mode;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "time_teaching_id")
-    private TimeTeaching timeTeaching;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "teaching_class_id")
-    private TeachingClass teachingClass;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
-    private Account account;
 
     @Column(name = "status")
     private boolean status;

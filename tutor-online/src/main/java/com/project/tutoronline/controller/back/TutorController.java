@@ -35,9 +35,6 @@ public class TutorController {
     private TeachingClassService teachingClassService;
 
     @Autowired
-    private TutorTeachingClassService tutorTeachingClassService;
-
-    @Autowired
     private TeachingClassMapper teachingClassMapper;
 
     @GetMapping(value = {"", "/"})
@@ -61,14 +58,6 @@ public class TutorController {
                 return "redirect:" + REDIRECT_URL;
             }
             List<TeachingClass> teachingClassList = teachingClassService.findAll();
-            List<TutorTeachingClass> tutorTeachingClassList = tutorTeachingClassService.findByTutor(tutor);
-
-            List<String> teachingClassIdList = new ArrayList<>();
-            tutorTeachingClassList.forEach(
-                    element -> {
-                        teachingClassIdList.add(String.valueOf(element.getTeachingClass().getId()));
-                    }
-            );
 
             if (action != null) {
                 model.addAttribute("status", "warning");
@@ -83,7 +72,6 @@ public class TutorController {
             }
 
             TutorDTO tutorDTO = tutorMapper.toDTO(tutor);
-            tutorDTO.setTeachingClassIdList(teachingClassIdList);
             model.addAttribute("tutorDTO", tutorDTO);
             model.addAttribute("accountDTO", tutorDTO.getAccountDTO());
             model.addAttribute("teachingClassDTOList", teachingClassMapper.toListDTO(teachingClassList));

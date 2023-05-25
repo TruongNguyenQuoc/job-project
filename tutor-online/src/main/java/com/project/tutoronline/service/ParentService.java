@@ -10,7 +10,5 @@ public interface ParentService {
 
     Parent findById(long id);
 
-    List<Parent> findByFullName(String fullName);
-
     Parent save(Parent parent);
 }
