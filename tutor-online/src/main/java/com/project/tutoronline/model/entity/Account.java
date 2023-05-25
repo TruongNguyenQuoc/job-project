@@ -18,6 +18,9 @@ public class Account extends BaseEntity implements Serializable {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @Column(name = "fullName")
+    private String fullName;
+
     @Column(name = "username")
     private String username;
 

@@ -1,16 +1,14 @@
 package com.project.tutoronline.model.mapper.impl;
 
 import com.project.tutoronline.model.dto.AccountDTO;
+import com.project.tutoronline.model.dto.CourseDTO;
 import com.project.tutoronline.model.dto.PostDTO;
 import com.project.tutoronline.model.dto.TeachingClassDTO;
-import com.project.tutoronline.model.dto.TimeTeachingDTO;
 import com.project.tutoronline.model.entity.Post;
+import com.project.tutoronline.model.entity.PostTimeTeaching;
 import com.project.tutoronline.model.mapper.AccountMapper;
 import com.project.tutoronline.model.mapper.PostMapper;
-import com.project.tutoronline.service.AccountService;
-import com.project.tutoronline.service.PostService;
-import com.project.tutoronline.service.TeachingClassService;
-import com.project.tutoronline.service.TimeTeachingService;
+import com.project.tutoronline.service.*;
 import com.project.tutoronline.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,10 +29,13 @@ public class PostMapperImpl implements PostMapper {
     private PostService postService;
 
     @Autowired
-    private TimeTeachingService timeTeachingService;
+    private CourseService courseService;
 
     @Autowired
     private TeachingClassService teachingClassService;
+
+    @Autowired
+    private PostTimeTeachingService postTimeTeachingService;
 
     @Override
     public PostDTO toDTO(Post post) {
@@ -42,6 +43,7 @@ public class PostMapperImpl implements PostMapper {
 
         PostDTO postDTO = new PostDTO();
         postDTO.setId(post.getId());
+        postDTO.setFullName(post.getFullName());
         postDTO.setAddress(post.getAddress());
         postDTO.setPrice(ValidatorUtil.formatNumber(post.getPrice()));
         postDTO.setNumberOfSession(String.valueOf(post.getNumberOfSession()));
@@ -56,13 +58,13 @@ public class PostMapperImpl implements PostMapper {
             postDTO.setAccountId(post.getAccount().getId());
         }
 
-        if (post.getTimeTeaching() != null) {
-            TimeTeachingDTO timeTeachingDTO = new TimeTeachingDTO();
-            timeTeachingDTO.setId(post.getTimeTeaching().getId());
-            timeTeachingDTO.setName(post.getTimeTeaching().getName());
-            timeTeachingDTO.setStatus(post.getTimeTeaching().isStatus());
-            postDTO.setTimeTeachingDTO(timeTeachingDTO);
-            postDTO.setTimeTeachingId(post.getTimeTeaching().getId());
+        if (post.getCourse() != null) {
+            CourseDTO courseDTO = new CourseDTO();
+            courseDTO.setId(post.getCourse().getId());
+            courseDTO.setName(post.getCourse().getName());
+            courseDTO.setStatus(post.getCourse().isStatus());
+            postDTO.setCourseDTO(courseDTO);
+            postDTO.setCourseId(post.getCourse().getId());
         }
 
         if (post.getTeachingClass() != null) {
@@ -71,8 +73,17 @@ public class PostMapperImpl implements PostMapper {
             teachingClassDTO.setName(post.getTeachingClass().getName());
             teachingClassDTO.setStatus(post.getTeachingClass().isStatus());
             postDTO.setTeachingClassDTO(teachingClassDTO);
-            postDTO.setTeachingId(post.getTeachingClass().getId());
+            postDTO.setTeachingClassId(post.getTeachingClass().getId());
         }
+
+        List<PostTimeTeaching> postTimeTeachingList = postTimeTeachingService.findByPost(post);
+        List<String> postTimeTeachingIdList = new ArrayList<>();
+        postTimeTeachingList.forEach(
+                element -> {
+                    postTimeTeachingIdList.add(String.valueOf(element.getTimeTeaching().getId()));
+                }
+        );
+        postDTO.setTimeTeachingId(postTimeTeachingIdList);
 
         return postDTO;
     }
@@ -96,17 +107,18 @@ public class PostMapperImpl implements PostMapper {
         if (post == null) post = new Post();
 
         post.setId(postDTO.getId());
+        post.setFullName(postDTO.getFullName());
         post.setAddress(postDTO.getAddress());
         post.setPrice(ValidatorUtil.formatNumber(postDTO.getPrice()));
         post.setNumberOfSession(Integer.parseInt(postDTO.getNumberOfSession()));
-        post.setInformation(postDTO.getAddress());
-        post.setRequirement(postDTO.getAddress());
-        post.setMode(postDTO.getAddress());
+        post.setInformation(postDTO.getInformation());
+        post.setRequirement(postDTO.getRequirement());
+        post.setMode(postDTO.getMode());
         post.setStatus(postDTO.isStatus());
 
         post.setAccount(accountService.findById(postDTO.getAccountId()));
-        post.setTeachingClass(teachingClassService.findById(postDTO.getTeachingId()));
-        post.setTimeTeaching(timeTeachingService.findById(postDTO.getTimeTeachingId()));
+        post.setCourse(courseService.findById(postDTO.getCourseId()));
+        post.setTeachingClass(teachingClassService.findById(postDTO.getTeachingClassId()));
 
         return post;
     }

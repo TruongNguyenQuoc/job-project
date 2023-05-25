@@ -10,6 +10,7 @@ public class AccountDTO {
     private long id;
     private String role;
     private String username;
+    private String fullName;
     private String password;
     private String email;
     private boolean status;

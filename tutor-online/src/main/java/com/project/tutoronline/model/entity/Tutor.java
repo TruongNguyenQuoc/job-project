@@ -16,9 +16,6 @@ public class Tutor extends BaseEntity {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @Column(name = "fullName")
-    private String fullName;
-
     @Column(name = "phone")
     private String phone;
 

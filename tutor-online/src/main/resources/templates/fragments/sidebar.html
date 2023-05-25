@@ -89,6 +89,13 @@
                             <p>Môn Học</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/back/post"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/post') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-mail-bulk"></i>
+                            <p>Bài Viết</p>
+                        </a>
+                    </li>
 
                     <li class="nav-header">Thiết Lập</li>
                     <li class="nav-item">
