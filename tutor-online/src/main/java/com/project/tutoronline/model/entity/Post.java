@@ -44,6 +44,9 @@ public class Post extends BaseEntity {
     @Column(name = "mode")
     private String mode;
 
+    @Column(name = "progress")
+    private String progress;
+
     @Column(name = "status")
     private boolean status;
 

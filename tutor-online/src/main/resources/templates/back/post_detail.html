@@ -128,14 +128,29 @@
                                                        id="requirement" placeholder="..." th:field="*{requirement}"
                                                        readonly>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="inputStatus">Trạng Thái</label>
-                                                <select id="inputStatus" class="form-control select2"
-                                                        style="width: 100%;"
-                                                        th:field="*{status}">
-                                                    <option value="true">Kích Hoạt</option>
-                                                    <option value="false">Tạm Ngưng</option>
-                                                </select>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputStatus">Trạng Thái</label>
+                                                        <select id="inputStatus" class="form-control select2"
+                                                                style="width: 100%;"
+                                                                th:field="*{status}">
+                                                            <option value="true">Kích Hoạt</option>
+                                                            <option value="false">Tạm Ngưng</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Tiến Trình</label>
+                                                        <select class="form-control select2" style="width: 100%;" th:field="*{progress}">
+                                                            <option value="Đang Xét Duyệt">Đang Xét Duyệt</option>
+                                                            <option value="Lớp Chưa Giao">Lớp Chưa Giao</option>
+                                                            <option value="Lớp Đã Giao">Lớp Đã Giao</option>
+                                                            <option value="Đã Hủy">Đã Hủy</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
