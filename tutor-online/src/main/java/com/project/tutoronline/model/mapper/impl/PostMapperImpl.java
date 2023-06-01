@@ -50,6 +50,7 @@ public class PostMapperImpl implements PostMapper {
         postDTO.setInformation(post.getInformation());
         postDTO.setRequirement(post.getRequirement());
         postDTO.setMode(post.getMode());
+        postDTO.setProgress(post.getProgress());
         postDTO.setStatus(post.isStatus());
 
         if (post.getAccount() != null) {
@@ -79,9 +80,7 @@ public class PostMapperImpl implements PostMapper {
         List<PostTimeTeaching> postTimeTeachingList = postTimeTeachingService.findByPost(post);
         List<String> postTimeTeachingIdList = new ArrayList<>();
         postTimeTeachingList.forEach(
-                element -> {
-                    postTimeTeachingIdList.add(String.valueOf(element.getTimeTeaching().getId()));
-                }
+                element -> postTimeTeachingIdList.add(String.valueOf(element.getTimeTeaching().getId()))
         );
         postDTO.setTimeTeachingId(postTimeTeachingIdList);
 
@@ -114,6 +113,7 @@ public class PostMapperImpl implements PostMapper {
         post.setInformation(postDTO.getInformation());
         post.setRequirement(postDTO.getRequirement());
         post.setMode(postDTO.getMode());
+        post.setProgress(postDTO.getProgress());
         post.setStatus(postDTO.isStatus());
 
         post.setAccount(accountService.findById(postDTO.getAccountId()));

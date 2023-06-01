@@ -17,6 +17,7 @@ public class PostDTO {
     private String information;
     private String requirement;
     private String mode;
+    private String progress;
     private boolean status;
 
     private long accountId;
@@ -29,5 +30,8 @@ public class PostDTO {
     private CourseDTO courseDTO;
 
     private List<String> timeTeachingId;
+
+    private String startDate;
+    private String endDate;
 
 }

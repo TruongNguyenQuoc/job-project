@@ -97,6 +97,15 @@
                         </a>
                     </li>
 
+                    <li class="nav-header">Thống Kê</li>
+                    <li class="nav-item">
+                        <a href="/back/report-post"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/report-post') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon fas fa-chart-line"></i>
+                            <p>Bài Viết</p>
+                        </a>
+                    </li>
+
                     <li class="nav-header">Thiết Lập</li>
                     <li class="nav-item">
                         <a href="/change-password"

@@ -1,5 +1,6 @@
 package com.project.tutoronline.service.impl;
 
+import com.project.tutoronline.model.dto.PostDTO;
 import com.project.tutoronline.model.entity.Account;
 import com.project.tutoronline.model.entity.Post;
 import com.project.tutoronline.repository.PostRepository;
@@ -28,6 +29,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findByAccount(Account account) {
         return postRepository.findByAccount(account);
+    }
+
+    @Override
+    public List<Post> searchPost(PostDTO postDTO) {
+        String startDate = postDTO.getStartDate() + " 00:00:00";
+        String endDate = postDTO.getEndDate() +  " 23:59:59";
+        return postRepository.findByCreatedOn(startDate, endDate);
     }
 
     @Override

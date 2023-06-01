@@ -45,7 +45,7 @@ public class PostTimeTeachingMapperImpl implements PostTimeTeachingMapper {
 
     @Override
     public List<PostTimeTeachingDTO> toListDTO(List<PostTimeTeaching> postTimeTeachings) {
-       if(postTimeTeachings == null) return null;
+        if (postTimeTeachings == null) return null;
 
         List<PostTimeTeachingDTO> result = new ArrayList<>();
         postTimeTeachings.forEach(postTimeTeaching -> result.add(toDTO(postTimeTeaching)));

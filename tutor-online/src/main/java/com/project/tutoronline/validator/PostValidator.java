@@ -31,20 +31,15 @@ public class PostValidator implements Validator {
             errors.rejectValue("numberOfSession", "Vui lòng nhập Số buổi!",
                     "Vui lòng nhập Số buổi!");
         } else {
-            if (!ValidatorUtil.isNumeric(postDTO.getNumberOfSession())){
+            if (!ValidatorUtil.isNumeric(postDTO.getNumberOfSession())) {
                 errors.rejectValue("numberOfSession", "Số buổi phải là sô!",
                         "Số buổi phải là sô!");
             }
         }
 
         if (ValidatorUtil.isEmpty(postDTO.getPrice())) {
-            errors.rejectValue("numberOfSession", "Vui lòng nhập Mức Lương!",
+            errors.rejectValue("price", "Vui lòng nhập Mức Lương!",
                     "Vui lòng nhập Mức Lương!");
-        } else {
-            if (!ValidatorUtil.isNumeric(postDTO.getPrice())){
-                errors.rejectValue("numberOfSession", "Mức Lương phải là sô!",
-                        "Mức Lương phải là sô!");
-            }
         }
     }
 }
