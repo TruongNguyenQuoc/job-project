@@ -51,6 +51,7 @@ public class TutorMapperImpl implements TutorMapper {
         if (tutor.getAccount() != null) {
             AccountDTO accountDTO = accountMapper.toDTO(tutor.getAccount());
             tutorDTO.setAccountDTO(accountDTO);
+            tutorDTO.setFullName(tutor.getAccount().getFullName());
             tutorDTO.setAccountId(tutor.getAccount().getId());
         }
 
