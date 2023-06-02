@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Phụ Huynh | Tutor Online</title>
+    <title>Việc Làm | Tutor Online</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -45,7 +45,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/back/dashboard">Trang Chủ</a></li>
-                            <li class="breadcrumb-item">Phụ Huynh</li>
+                            <li class="breadcrumb-item">Việc Làm</li>
                             <li class="breadcrumb-item active">Biểu Mẫu</li>
                         </ol>
                     </div>
@@ -59,14 +59,14 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Thông Tin Phụ Huynh</h3>
+                                <h3 class="card-title">Thông Tin Việc Làm</h3>
                             </div>
 
                             <form id="quickForm"
                                   method="post"
                                   enctype="multipart/form-data"
-                                  th:action="@{/back/parent/form}"
-                                  th:object="${parentDTO}">
+                                  th:action="@{/back/job/form}"
+                                  th:object="${jobDTO}">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="alert alert-dismissible col-md-12"
@@ -82,7 +82,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputId">Mã Phụ Huynh </label>
+                                                <label for="inputId">Mã Việc Làm </label>
                                                 <input type="text" name="id" class="form-control"
                                                        th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''"
                                                        id="inputId" placeholder="..." th:field="*{id}" readonly>
@@ -91,17 +91,15 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="fullName">Tên Phụ Huynh </label>
+                                                <label for="fullName">Người Đăng</label>
                                                 <input type="text" name="fullName" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('fullName')} ? 'is-invalid' : ''"
-                                                       id="fullName" placeholder="..." th:field="*{accountDTO.fullName}" readonly>
+                                                       id="fullName" placeholder="..." th:field="*{postDTO.fullName}" readonly>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="phone">Số Điện Thoại</label>
+                                                <label for="phone">Địa Chỉ</label>
                                                 <input type="text" name="phone" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : ''"
-                                                       id="phone" placeholder="..." th:field="*{phone}" readonly>
+                                                       id="phone" placeholder="..." th:field="*{postDTO.address}" readonly>
                                             </div>
 
                                         </div>
@@ -109,10 +107,9 @@
                                         <div class="col-md-6">
 
                                             <div class="form-group">
-                                                <label for="address">Địa Chỉ</label>
+                                                <label for="address">Gia Sư</label>
                                                 <input type="text" name="address" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
-                                                       id="address" placeholder="..." th:field="*{address}" readonly>
+                                                       id="address" placeholder="..." th:field="*{tutorDTO.fullName}" readonly>
                                             </div>
 
                                             <div class="form-group">
@@ -128,10 +125,12 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a type="button" class="mr-3" href="/back/parent/">
+                                    <a type="button" class="mr-3" href="/back/job/">
                                         Quay Lại
                                     </a>
                                     <input type="hidden" name="id" class="form-control" th:field="*{id}">
+                                    <input type="hidden" name="id" class="form-control" th:field="*{postId}">
+                                    <input type="hidden" name="id" class="form-control" th:field="*{tutorId}">
                                     <button type="submit" class="btn btn-primary">Lưu Dữ Liệu</button>
                                 </div>
                             </form>

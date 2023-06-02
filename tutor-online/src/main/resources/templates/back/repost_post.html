@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="col-lg-3 col-3">
-                        <div class="small-box bg-success">
+                        <div class="small-box bg-warning">
                             <div class="inner">
                                 <h3 th:text="${postApproved}"></h3>
                                 <p>Tổng Lớp Chưa Giao</p>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-3">
-                        <div class="small-box bg-success">
+                        <div class="small-box bg-primary">
                             <div class="inner">
                                 <h3 th:text="${postTotalPrice}"></h3>
                                 <p>Tổng Tiền</p>
@@ -171,7 +171,12 @@
                                         <td th:text="${item.address}"></td>
                                         <td th:text="${item.price} + ' VND'"></td>
                                         <td th:text="${item.mode}"></td>
-                                        <td th:text="${item.progress}"></td>
+                                        <td th:switch="${item.progress}">
+                                            <p class="badge badge-warning" th:case="'Đang Xét Duyệt'">Đang Xét Duyệt</p>
+                                            <p class="badge badge-primary" th:case="'Lớp Chưa Giao'">Lớp Chưa Giao</p>
+                                            <p class="badge badge-success" th:case="'Lớp Đã Giao'">Lớp Đã Giao</p>
+                                            <p class="badge badge-danger" th:case="'Đã Hủy'">Đã Hủy</p>
+                                        </td>
                                     </tr>
                                     </tbody>
                                     <tfoot>

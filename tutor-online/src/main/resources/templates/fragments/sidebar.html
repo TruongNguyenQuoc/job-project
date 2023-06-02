@@ -96,6 +96,13 @@
                             <p>Bài Viết</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/back/job"
+                           th:class="${#httpServletRequest.requestURI.contains('/back/job') ? 'nav-link active' : 'nav-link'}">
+                            <i class="nav-icon far fa-clipboard"></i>
+                            <p>Việc Làm</p>
+                        </a>
+                    </li>
 
                     <li class="nav-header">Thống Kê</li>
                     <li class="nav-item">
