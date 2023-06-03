@@ -24,7 +24,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             if (account != null) {
                 redirectURL = switch (account.getRole().getName().toUpperCase()) {
                     case "ADMIN" -> "/back/dashboard";
-                    case "TUTOR", "GUEST" -> "/front/home";
+                    case "TUTOR", "PARENT" -> "/";
                     default -> "/login";
                 };
             }

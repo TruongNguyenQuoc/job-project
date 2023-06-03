@@ -25,12 +25,19 @@ public class TutorDTO {
     private String specialization;
     private String yearCollege;
     private String level;
+    private String advantage;
     private boolean status;
 
     private MultipartFile avatarMul;
+    private MultipartFile idPhotoMul;
+    private MultipartFile cardPhotoMul;
+    private MultipartFile degreePhotoMul;
 
     private AccountDTO accountDTO;
     private long accountId;
 
     private List<String> teachingClassIdList;
+
+    private String yearCollege1;
+    private String yearCollege2;
 }

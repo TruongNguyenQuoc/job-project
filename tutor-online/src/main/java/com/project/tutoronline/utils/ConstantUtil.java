@@ -2,7 +2,9 @@ package com.project.tutoronline.utils;
 
 public class ConstantUtil {
 
-    public static final String PATH_FILE_UPLOAD = "/";
+    public static final String PATH_FILE_UPLOAD = "E:\\Project\\job-project\\tutor-online\\src\\main\\resources\\static\\images";
+
+    public static final String PATH_URL_UPLOAD = "/images/";
 
     public static final String IMAGE_PATTERN = "/images/**";
 

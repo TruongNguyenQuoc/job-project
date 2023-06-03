@@ -10,9 +10,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "account")
-public class Account extends BaseEntity implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Account extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
@@ -29,6 +27,9 @@ public class Account extends BaseEntity implements Serializable {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "status")
     private boolean status;

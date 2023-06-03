@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<body>
+<div th:fragment="header">
+    <header class="header-area transparent">
+        <div class="container">
+            <div class="row no-gutter align-items-center position-relative">
+                <div class="col-12">
+                    <div class="header-align">
+                        <div class="header-align-start">
+                            <div class="header-logo-area">
+                                <a href="/home">
+                                    <img class="logo-main" th:src="@{/resources/front/img/logo-light.png}" alt="Logo"/>
+                                    <img class="logo-light" th:src="@{/resources/front/img/logo-light.png}" alt="Logo"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="header-align-center">
+                            <div class="header-navigation-area position-relative">
+                                <ul class="main-menu nav" th:if="${userLogin != null}">
+                                    <li><a href="/home"><span>Home</span></a></li>
+                                    <li class="has-submenu">
+                                        <a href="#"><span th:text="${userLogin?.fullName}"></span></a>
+                                        <ul class="submenu-nav">
+                                            <li th:if="${userLogin?.role == 'TUTOR'}"><a class="btn-registration"
+                                                                                         href="/front/profile/tutor">Thông
+                                                tin tài khoản</a>
+                                            </li>
+                                            <li th:if="${userLogin?.role == 'PARENT'}">
+                                                <a class="btn-registration" href="/front/profile/parent">Thông tin
+                                                    tài khoản
+                                                </a>
+                                            </li>
+                                            <li><a class="btn-registration" href="/change-password">Thay Đổi Mật Khẩu</a></li>
+                                            <li><a class="btn-registration" href="/logout">Đăng xuất</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="main-menu nav" th:if="${userLogin == null}">
+                                    <li><a href="/home"><span>Home</span></a></li>
+                                    <li><a href="/login"><span>Đăng Nhập</span></a></li>
+                                    <li class="has-submenu">
+                                        <a href="#"><span>Đăng Ký</span></a>
+                                        <ul class="submenu-nav">
+                                            <li><a class="btn-registration" href="/register/tutor">Đăng Ký Gia Sư</a></li>
+                                            <li><a class="btn-registration" href="/register/tutor">Đăng Ký Phụ Huynh</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+</body>
+</html>

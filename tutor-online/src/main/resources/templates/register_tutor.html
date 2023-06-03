@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng Ký Gia Sư | Tutor Online</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/resources/plugins/fontawesome-free/css/all.min.css}">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" th:href="@{/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/resources/dist/css/adminlte.min.css?v=3.2.0}">
+
+    <!-- summernote -->
+    <link rel="stylesheet" th:href="@{/resources/plugins/summernote/summernote-bs4.min.css}">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" th:href="@{/resources/plugins/codemirror/codemirror.css}">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <style>
+        .register-box {
+            width: 720px;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="/home"><b>Tutor</b> Online</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">ĐĂNG KÝ TÀI KHOẢN GIA SƯ</p>
+
+            <form enctype="multipart/form-data"
+                  th:action="@{/register/tutor}"
+                  th:object="${tutorDTO}"
+                  method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="fullName">Họ & Tên</label>
+                            <input type="text" name="fullName" class="form-control"
+                                   id="fullName"
+                                   th:field="*{accountDTO.fullName}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputBirthday">Ngày Sinh</label>
+                            <input type="date" name="inputBirthday" class="form-control"
+                                   id="inputBirthday" th:field="*{birthday}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="origin">Nguyên Quán</label>
+                            <input type="text" name="origin" class="form-control"
+                                   id="origin" th:field="*{origin}"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa Chỉ</label>
+                            <input type="text" name="address" class="form-control"
+                                   id="address" th:field="*{address}"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="idNumber">Số CMND/CCCD</label>
+                            <input type="text" name="idNumber" class="form-control"
+                                   th:classappend="${#fields.hasErrors('idNumber')} ? 'is-invalid' : ''"
+                                   id="idNumber" th:field="*{idNumber}"
+                                   required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('idNumber')}"
+                               th:errors="*{idNumber}"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control"
+                                   id="email"
+                                   th:classappend="${#fields.hasErrors('accountDTO.email')} ? 'is-invalid' : ''"
+                                   th:field="*{accountDTO.email}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.email')}"
+                               th:errors="*{accountDTO.email}"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số Điện Thoại</label>
+                            <input type="text" name="phone" class="form-control"
+                                   th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : ''"
+                                   id="phone" th:field="*{phone}"
+                                   required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('phone')}"
+                               th:errors="*{phone}"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật Khẩu</label>
+                            <input type="password" name="password" class="form-control"
+                                   id="password"
+                                   th:classappend="${#fields.hasErrors('accountDTO.password')} ? 'is-invalid' : ''"
+                                   th:field="*{accountDTO.password}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.password')}"
+                               th:errors="*{accountDTO.password}"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Xác Nhận Mật Khẩu</label>
+                            <input type="password" name="confirmPassword"
+                                   class="form-control"
+                                   id="confirmPassword"
+                                   th:classappend="${#fields.hasErrors('accountDTO.confirmPassword')} ? 'is-invalid' : ''"
+                                   th:field="*{accountDTO.confirmPassword}" required>
+                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.confirmPassword')}"
+                               th:errors="*{accountDTO.confirmPassword}"></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="school">Trường Đào Tạo</label>
+                            <input type="text" name="school" class="form-control"
+                                   id="school" th:field="*{school}"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialization">Ngành Học</label>
+                            <input type="text" name="specialization" class="form-control"
+                                   id="specialization"
+                                   th:field="*{specialization}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="yearCollege1">Niên Khóa</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="id" class="form-control"
+                                           th:classappend="${#fields.hasErrors('yearCollege')} ? 'is-invalid' : ''"
+                                           id="yearCollege1"
+                                           th:field="*{yearCollege1}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="id" class="form-control"
+                                           th:classappend="${#fields.hasErrors('yearCollege')} ? 'is-invalid' : ''"
+                                           id="yearCollege2"
+                                           th:field="*{yearCollege2}" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-danger" th:if="${#fields.hasErrors('yearCollege')}"
+                                       th:errors="*{yearCollege}"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Trình Độ</label>
+                            <select class="form-control select2" style="width: 100%;"
+                                    th:field="*{level}">
+                                <option value="Giáo Viên">Giáo Viên</option>
+                                <option value="Sinh Viên">Sinh Viên</option>
+                                <option value="Sinh Viên Sư Phạm">Sinh Viên Sư Phạm</option>
+                                <option value="Cử Nhân">Cử Nhân</option>
+                                <option value="Kỹ Sư">Kỹ Sư</option>
+                                <option value="Bằng Cấp Khác">Bằng Cấp Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teachingClass">Lớp Dạy</label>
+                            <select class="form-control select2" style="width: 100%;"
+                                    name="teachingClass" id="teachingClass" multiple
+                                    th:field="*{teachingClassIdList}">
+                                <option th:each="item : ${teachingClassDTOList}"
+                                        th:value="${item.id}"
+                                        th:text="${item.name}"/>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="idPhotoMul">Ảnh CMND/CCCD</label>
+                            <input type="file" class="form-control-file" name="idPhotoMul"
+                                   accept="image/png, image/jpg, image/jpeg" id="idPhotoMul">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardPhotoMul">Ảnh Thẻ</label>
+                            <input type="file" class="form-control-file" name="cardPhotoMul"
+                                   accept="image/png, image/jpg, image/jpeg" id="cardPhotoMul">
+                        </div>
+                        <div class="form-group">
+                            <label for="degreePhotoMul">Ảnh Bằng</label>
+                            <input type="file" class="form-control-file" name="degreePhotoMul"
+                                   accept="image/png, image/jpg, image/jpeg" id="degreePhotoMul">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="summernote">Ưu Điểm</label>
+                            <textarea id="summernote" th:field="*{advantage}">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Đăng Ký Gia Sư</button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="mb-1">
+                <a href="/forgot-password">Quên mật khẩu?</a>
+            </p>
+            <p class="mb-0">
+                <a href="/login" class="text-center">Bạn đã có tài khoản? Đăng nhập ngay!</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script th:src="@{/resources/plugins/jquery/jquery.min.js}"></script>
+    <!-- Bootstrap 4 -->
+    <script th:src="@{/resources/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/resources/dist/js/adminlte.min.js}"></script>
+    <!-- Summernote -->
+    <script  th:src="@{/resources/plugins/summernote/summernote-bs4.min.js}"></script>
+    <!-- CodeMirror -->
+    <script  th:src="@{/resources/plugins/codemirror/codemirror.js}"></script>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+    <script>
+        new MultiSelectTag('teachingClass')  // id
+    </script>
+
+    <script>
+        $(function () {
+            // Summernote
+            $('#summernote').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+</div>
+</body>
+</html>

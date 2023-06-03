@@ -11,7 +11,7 @@ public class TutorTeachingClassDTO {
     private TutorDTO tutorDTO;
 
     private long teachingClassId;
-    private TutorTeachingClassDTO teachingClassDTO;
+    private TeachingClassDTO teachingClassDTO;
 
     private boolean status;
 

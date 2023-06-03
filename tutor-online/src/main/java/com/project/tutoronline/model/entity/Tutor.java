@@ -12,12 +12,9 @@ import java.util.Date;
 @Table(name = "tutor")
 public class Tutor extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
-
-    @Column(name = "phone")
-    private String phone;
 
     @Column(name = "avatar")
     private String avatar;
@@ -54,6 +51,9 @@ public class Tutor extends BaseEntity {
 
     @Column(name = "level")
     private String level;
+
+    @Column(name = "advantage")
+    private String advantage;
 
     @Column(name = "status")
     private boolean status;
