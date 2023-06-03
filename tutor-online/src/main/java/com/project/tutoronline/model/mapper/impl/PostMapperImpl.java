@@ -9,6 +9,7 @@ import com.project.tutoronline.model.entity.PostTimeTeaching;
 import com.project.tutoronline.model.mapper.AccountMapper;
 import com.project.tutoronline.model.mapper.PostMapper;
 import com.project.tutoronline.service.*;
+import com.project.tutoronline.utils.DateUtil;
 import com.project.tutoronline.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -51,6 +52,7 @@ public class PostMapperImpl implements PostMapper {
         postDTO.setRequirement(post.getRequirement());
         postDTO.setMode(post.getMode());
         postDTO.setProgress(post.getProgress());
+        postDTO.setCreateOn(DateUtil.convertDateToString(post.getCreatedOn(), "dd-MM-yyyy"));
         postDTO.setStatus(post.isStatus());
 
         if (post.getAccount() != null) {

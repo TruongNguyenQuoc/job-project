@@ -82,7 +82,7 @@ public class TutorController {
     }
 
     @PostMapping(value = "/form")
-    public String save(Model model, TutorDTO tutorDTO, BindingResult bindingResult) {
+    public String save(TutorDTO tutorDTO) {
         try {
             String redirectUrl;
             Tutor tutor = tutorService.save(tutorMapper.toEntity(tutorDTO));

@@ -13,6 +13,10 @@ public interface AccountService {
 
     Account findByUsername(String username);
 
+    Account findByEmail(String email);
+
+    Account findByPhone(String phone);
+
     Account save(AccountDTO accountDTO);
 
     Account save(Account account);

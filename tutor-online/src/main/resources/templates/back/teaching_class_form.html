@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Thời Gian Dạy  | Tutor Online</title>
+    <title>Lớp Dạy | Tutor Online</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -45,7 +45,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/back/dashboard">Trang Chủ</a></li>
-                            <li class="breadcrumb-item">Thời Gian Dạy </li>
+                            <li class="breadcrumb-item">Lớp Dạy</li>
                             <li class="breadcrumb-item active">Biểu Mẫu</li>
                         </ol>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Thông Tin Thời Gian Dạy </h3>
+                                <h3 class="card-title">Thông Tin Lớp Dạy</h3>
                             </div>
 
                             <form id="quickForm"
@@ -82,7 +82,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputId">Mã Thời Gian Dạy </label>
+                                                <label for="inputId">Mã Lớp Dạy</label>
                                                 <input type="text" name="id" class="form-control"
                                                        th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''"
                                                        id="inputId" placeholder="..." th:field="*{id}" readonly
@@ -92,7 +92,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="inputUsername">Tên Thời Gian Dạy </label>
+                                                <label for="inputUsername">Tên Lớp</label>
                                                 <input type="text" name="username" class="form-control"
                                                        th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
                                                        id="inputUsername" placeholder="..." th:field="*{name}">

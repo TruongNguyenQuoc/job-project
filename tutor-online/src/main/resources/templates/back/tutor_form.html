@@ -200,25 +200,25 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="teachingClass">Ảnh CCCD</label>
-                                                <div class="col-sm-6" th:if="${idPhoto != null }">
-                                                    <img th:src="@{${idPhoto}}" width="100%"/>
+                                                <label for="teachingClass">Ảnh CMND/CCCD</label>
+                                                <div class="col-sm-6" th:if="${tutorDTO.idPhoto != null }">
+                                                    <img th:src="@{${tutorDTO.idPhoto}}" width="100%" alt="Ảnh CCCD"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="teachingClass">Ảnh Thẻ</label>
-                                                <div class="col-sm-6" th:if="${cardPhoto != null }">
-                                                    <img th:src="@{${cardPhoto}}" width="100%"/>
+                                                <div class="col-sm-6" th:if="${tutorDTO.cardPhoto != null }">
+                                                    <img th:src="@{${tutorDTO.cardPhoto}}" width="100%" alt="Ảnh CCCD"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="teachingClass">Ảnh Bằng</label>
-                                                <div class="col-sm-6" th:if="${degreePhoto != null }">
-                                                    <img th:field="${degreePhoto}" th:src="@{${degreePhoto}}" width="100%"/>
+                                                <div class="col-sm-6" th:if="${tutorDTO.degreePhoto != null }">
+                                                    <img th:src="@{${tutorDTO.degreePhoto}}" width="100%" alt="Ảnh Bằng"/>
                                                 </div>
                                             </div>
 

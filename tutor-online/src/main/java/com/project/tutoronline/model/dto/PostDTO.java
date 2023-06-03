@@ -18,6 +18,7 @@ public class PostDTO {
     private String requirement;
     private String mode;
     private String progress;
+    private String createOn;
     private boolean status;
 
     private long accountId;

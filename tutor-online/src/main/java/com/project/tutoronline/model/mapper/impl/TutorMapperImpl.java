@@ -9,6 +9,7 @@ import com.project.tutoronline.model.mapper.TutorMapper;
 import com.project.tutoronline.service.TutorService;
 import com.project.tutoronline.service.TutorTeachingClassService;
 import com.project.tutoronline.utils.DateUtil;
+import com.project.tutoronline.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,7 @@ public class TutorMapperImpl implements TutorMapper {
 
         TutorDTO tutorDTO = new TutorDTO();
         tutorDTO.setId(tutor.getId());
-        tutorDTO.setPhone(tutor.getPhone());
+        tutorDTO.setPhone(tutor.getAccount().getPhone());
         tutorDTO.setAvatar(tutor.getAvatar());
         tutorDTO.setAddress(tutor.getAddress());
         tutorDTO.setBirthday(DateUtil.convertDateToString(tutor.getBirthday(), "dd-MM-yyyy"));
@@ -46,6 +47,7 @@ public class TutorMapperImpl implements TutorMapper {
         tutorDTO.setSpecialization(tutor.getSpecialization());
         tutorDTO.setYearCollege(tutor.getYearCollege());
         tutorDTO.setLevel(tutor.getLevel());
+        tutorDTO.setAdvantage(tutor.getAdvantage());
         tutorDTO.setStatus(tutor.isStatus());
 
         if (tutor.getAccount() != null) {
@@ -84,20 +86,26 @@ public class TutorMapperImpl implements TutorMapper {
         Tutor tutor = tutorService.findById(tutorDTO.getId());
         if (tutor == null) tutor = new Tutor();
 
-        tutor.setPhone(tutorDTO.getPhone());
         tutor.setAvatar(tutorDTO.getAvatar());
         tutor.setAddress(tutorDTO.getAddress());
         tutor.setBirthday(DateUtil.convertStringToDate(tutorDTO.getBirthday(), "dd-MM-yyyy"));
         tutor.setOrigin(tutorDTO.getOrigin());
         tutor.setIdNumber(tutorDTO.getIdNumber());
-
-//        tutor.setIdPhoto(tutorDTO.getIdPhoto());
-//        tutor.setCardPhoto(tutorDTO.getCardPhoto());
-//        tutor.setDegreePhoto(tutorDTO.getDegreePhoto());
+        tutor.setAdvantage(tutorDTO.getAdvantage());
+        tutor.setIdPhoto(tutorDTO.getIdPhoto());
+        tutor.setCardPhoto(tutorDTO.getCardPhoto());
+        tutor.setDegreePhoto(tutorDTO.getDegreePhoto());
 
         tutor.setSchool(tutorDTO.getSchool());
         tutor.setSpecialization(tutorDTO.getSpecialization());
-        tutor.setYearCollege(tutorDTO.getYearCollege());
+
+
+        if (ValidatorUtil.isEmpty(tutorDTO.getYearCollege())) {
+            tutor.setYearCollege(tutorDTO.getYearCollege1() + "-" +tutorDTO.getYearCollege2());
+        } else {
+            tutor.setYearCollege(tutorDTO.getYearCollege());
+        }
+
         tutor.setLevel(tutorDTO.getLevel());
         tutor.setStatus(tutorDTO.isStatus());
 

@@ -40,6 +40,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account findByEmail(String email) {
+        return accountRepository.findByEmail(email);
+    }
+
+    @Override
+    public Account findByPhone(String phone) {
+        return accountRepository.findByPhone(phone);
+    }
+
+    @Override
     public Account save(AccountDTO accountDTO) {
         if (accountDTO == null) {
             return null;

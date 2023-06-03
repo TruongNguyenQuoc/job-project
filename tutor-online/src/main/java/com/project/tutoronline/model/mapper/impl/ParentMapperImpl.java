@@ -31,7 +31,6 @@ public class ParentMapperImpl implements ParentMapper {
 
         ParentDTO parentDTO = new ParentDTO();
         parentDTO.setId(parent.getId());
-        parentDTO.setPhone(parent.getPhone());
         parentDTO.setAddress(parent.getAddress());
         parentDTO.setAvatar(parent.getAvatar());
         parentDTO.setStatus(parent.isStatus());
@@ -60,8 +59,8 @@ public class ParentMapperImpl implements ParentMapper {
         if(parentDTO == null) return null;
 
         Parent parent = parentService.findById(parentDTO.getId());
-        parent.setId(parentDTO.getId());
-        parent.setPhone(parentDTO.getPhone());
+        if (parent == null) parent = new Parent();
+
         parent.setAddress(parentDTO.getAddress());
         parent.setAvatar(parentDTO.getAvatar());
         parent.setStatus(parentDTO.isStatus());

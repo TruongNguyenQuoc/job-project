@@ -15,9 +15,6 @@ public class Parent extends BaseEntity {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @Column(name = "phone")
-    private String phone;
-
     @Column(name = "avatar")
     private String avatar;
 

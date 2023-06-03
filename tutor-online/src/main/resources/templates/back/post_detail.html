@@ -27,20 +27,31 @@
     <link rel="stylesheet" th:href="@{/resources/plugins/daterangepicker/daterangepicker.css}">
     <!-- summernote -->
     <link rel="stylesheet" th:href="@{/resources/plugins/summernote/summernote-bs4.min.css}">
+
+    <!-- CodeMirror -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 
     <style>
-        .mult-select-tag .body{
+        .mult-select-tag .body {
             height: 38px;
         }
-        .mult-select-tag .input-container,.mult-select-tag .item-label  {
+
+        .mult-select-tag .input-container, .mult-select-tag .item-label {
             padding: 2px 10px;
         }
-        .mult-select-tag .btn-container{
+
+        .mult-select-tag .btn-container {
             display: none;
         }
-        .mult-select-tag .item-close-svg{display: none!important;}
+
+        .mult-select-tag .item-close-svg {
+            display: none !important;
+        }
+
+        .note-editor.note-frame .note-statusbar .note-resizebar {
+            display: none;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -121,13 +132,6 @@
                                                        id="information" placeholder="..." th:field="*{information}"
                                                        readonly>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="requirement">Yêu Cầu</label>
-                                                <input type="text" name="phone" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('requirement')} ? 'is-invalid' : ''"
-                                                       id="requirement" placeholder="..." th:field="*{requirement}"
-                                                       readonly>
-                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -143,7 +147,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Tiến Trình</label>
-                                                        <select class="form-control select2" style="width: 100%;" th:field="*{progress}">
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                                th:field="*{progress}">
                                                             <option value="Đang Xét Duyệt">Đang Xét Duyệt</option>
                                                             <option value="Lớp Chưa Giao">Lớp Chưa Giao</option>
                                                             <option value="Lớp Đã Giao">Lớp Đã Giao</option>
@@ -160,14 +165,16 @@
                                                     <div class="form-group">
                                                         <label for="teachingClass">Lớp</label>
                                                         <input type="text" name="teachingClass" class="form-control"
-                                                               id="teachingClass" placeholder="..." th:field="*{teachingClassDTO.name}" readonly>
+                                                               id="teachingClass" placeholder="..."
+                                                               th:field="*{teachingClassDTO.name}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="courseId">Môn Học</label>
                                                         <input type="text" name="teachingClass" class="form-control"
-                                                               id="courseId" placeholder="..." th:field="*{courseDTO.name}" readonly>
+                                                               id="courseId" placeholder="..."
+                                                               th:field="*{courseDTO.name}" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,7 +188,8 @@
                                                 <label for="numberOfSession">Số Buổi Học</label>
                                                 <input type="text" name="numberOfSession" class="form-control"
                                                        th:classappend="${#fields.hasErrors('numberOfSession')} ? 'is-invalid' : ''"
-                                                       id="numberOfSession" placeholder="..." th:field="*{numberOfSession}" readonly>
+                                                       id="numberOfSession" placeholder="..."
+                                                       th:field="*{numberOfSession}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Hình Thức</label>
@@ -201,6 +209,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="summernote">Yêu Cầu</label>
+                                            <textarea id="summernote" th:field="*{requirement}"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <a type="button" class="mr-3" href="/back/post/">
@@ -209,7 +223,8 @@
                                     <input type="hidden" name="id" class="form-control" th:field="*{id}">
                                     <input type="hidden" name="accountId" class="form-control" th:field="*{accountId}">
                                     <input type="hidden" name="courseId" class="form-control" th:field="*{courseId}">
-                                    <input type="hidden" name="teachingClassId" class="form-control" th:field="*{teachingClassId}">
+                                    <input type="hidden" name="teachingClassId" class="form-control"
+                                           th:field="*{teachingClassId}">
                                     <button type="submit" class="btn btn-primary">Lưu Dữ Liệu</button>
                                 </div>
                             </form>
@@ -257,7 +272,23 @@
 <script th:src="@{/resources/dist/js/adminlte.js}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script th:src="@{/resources/dist/js/pages/dashboard.js}"></script>
+<!-- Summernote -->
+<script th:src="@{/resources/plugins/summernote/summernote-bs4.min.js}"></script>
+<!-- CodeMirror -->
+<script th:src="@{/resources/plugins/codemirror/codemirror.js}"></script>
 
+<script>
+    $(function () {
+        // Summernote
+        $('#summernote').summernote()
+
+        // CodeMirror
+        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            mode: "htmlmixed",
+            theme: "monokai"
+        });
+    })
+</script>
 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
 
 <script>

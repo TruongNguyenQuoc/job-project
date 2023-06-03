@@ -63,10 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/", "/login/**", "/register/**", "/forgot-password/**").permitAll()
+                .antMatchers("/home", "/", "/front/register/**", "/login/**", "/register/**", "/forgot-password/**").permitAll()
 
                 .antMatchers("/back/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/front/**").hasAnyAuthority("TUTOR", "GUEST")
+                .antMatchers("/front/**").hasAnyAuthority("TUTOR", "PARENT")
 
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
