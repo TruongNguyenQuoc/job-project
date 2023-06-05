@@ -51,9 +51,11 @@ public class CheckoutJobController {
         Job job = new Job();
         job.setPost(post);
         job.setTutor(tutor);
+        job.setStatus(true);
         post.setProgress("Đang Xác Nhận Gia Sư");
         postService.save(post);
         jobService.save(job);
+
         String redirectUrl = "/front/profile/tutor/";
         return "redirect:" + redirectUrl;
     }

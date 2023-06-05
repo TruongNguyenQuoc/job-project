@@ -8,6 +8,8 @@ public interface EmailService {
 
     boolean sendEmailForForgotPassword(EmailAccountDTO emailDTO);
 
+    boolean sendEmailForCheckout(EmailTemplateDTO emailTemplateDTO);
+
     boolean sendEmailForRegister(EmailTemplateDTO emailTemplateDTO);
 
 }

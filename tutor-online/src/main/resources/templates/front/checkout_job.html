@@ -113,7 +113,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="team-details-btn" th:if="${!postDTO.progress.equals('Lớp Chưa Giao')}">
+                            <div class="team-details-btn" th:if="${postDTO.progress.equals('Lớp Chưa Giao')}">
                                 <a class="btn-theme" th:href="'/checkout-job/' + ${id} + '?action=confirm'">Xác Nhận
                                     Việc Làm</a>
                             </div>

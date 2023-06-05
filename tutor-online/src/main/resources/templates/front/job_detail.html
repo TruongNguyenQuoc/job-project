@@ -71,6 +71,10 @@
         .team-details-wrap{
             padding: 10px;
         }
+        .team-details-btn .btn-theme.btn-light:hover {
+            background-color: #e93737;
+            border-color: #e93737;
+        }
     </style>
 </head>
 
@@ -125,21 +129,15 @@
                             </div>
                             <div class="job-details-price">
                                 <h4 class="title" th:text="${postDTO.price} + ' VND/Tháng'"></h4>
+                                <div class="team-details-btn" style="display: flex">
+                                    <a th:href="'/front/post/form/' + ${postDTO.id} + '?action=refuse'" class="btn-theme btn-light me-3">Từ Chối</a>
+                                    <a th:href="'/front/post/form/' + ${postDTO.id} + '?action=accept'"type="button" class="btn-theme">Chấp Nhận</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-7 col-xl-7">
-                        <div class="job-details-item">
-                            <div class="content">
-                                <h4 class="title">Yêu Cầu</h4>
-                                <div class="form-group">
-                                    <textarea id="summernote" th:field="*{postDTO.requirement}"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-5 col-xl-5">
                         <div class="job-sidebar">
                             <div class="widget-item">
@@ -150,24 +148,14 @@
                                     <table class="table">
                                         <tbody>
                                         <tr>
-                                            <td class="table-name">Lớp</td>
+                                            <td class="table-name">Địa Chỉ</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${postDTO.address}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Lớp Dạy</td>
                                             <td class="dotted">:</td>
                                             <td th:text="${postDTO.teachingClassDTO.name}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-name">Môn Học</td>
-                                            <td class="dotted">:</td>
-                                            <td th:text="${postDTO.courseDTO.name}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-name">Đăng Ngày</td>
-                                            <td class="dotted">:</td>
-                                            <td th:text="${postDTO.createOn}"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-name">Mức Lương</td>
-                                            <td class="dotted">:</td>
-                                            <td th:text="${postDTO.price + ' VND'}"></td>
                                         </tr>
                                         <tr>
                                             <td class="table-name">Số Buổi</td>
@@ -175,21 +163,70 @@
                                             <td th:text="${postDTO.numberOfSession}"></td>
                                         </tr>
                                         <tr>
+                                            <td class="table-name">Thời Gian</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${postDTO.timeTeachingName}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Thông tin</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${postDTO.information}"></td>
+                                        </tr>
+                                        <tr>
                                             <td class="table-name">Hình Thức</td>
                                             <td class="dotted">:</td>
                                             <td th:text="${postDTO.mode}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Thông Tin</td>
+                                            <td class="table-name">Yêu Cầu</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${postDTO.information}"></td>
+                                            <td th:utext="${postDTO.requirement}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-xl-1"></div>
+                    <div class="col-lg-6 col-xl-6" th:if="${tutorDTO != null}">
+                        <div class="team-sidebar">
+                            <div class="widget-item">
+                                <div class="widget-title">
+                                    <h3 class="title">Gia Sư</h3>
+                                </div>
+                                <div class="summery-info">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td class="table-name">Họ & Tên</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.fullName}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Thời Gian Dạy</td>
+                                            <td class="table-name">Số Điện Thoại</td>
                                             <td class="dotted">:</td>
-                                            <td>
-                                                <p class="mb-2" th:each="item : ${postTimeTeachingList}" th:text="${item.timeTeachingDTO.name}"></p>
-                                            </td>
+                                            <td th:text="${tutorDTO.phone}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Địa Chỉ</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.address}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Trình Độ</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.level}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Trường Đào Tạo</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.school}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Ngành học</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.specialization}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
