@@ -1518,8 +1518,8 @@ table p {
 -----------------------------------------------------------------------
 */
 .recent-job-inner-area .container {
-  padding-top: 120px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 @media only screen and (max-width: 1199px) {
   .recent-job-inner-area .container {

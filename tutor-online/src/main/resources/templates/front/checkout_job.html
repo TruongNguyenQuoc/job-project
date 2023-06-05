@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Trang Chủ | Tutor Online</title>
+    <title>Xác Nhận Việc Làm | Tutor Online</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
@@ -25,25 +25,38 @@
 
     <!--== Main Style CSS ==-->
     <link th:href="@{/resources/front/css/style.css}" rel="stylesheet"/>
-
-    <!-- summernote -->
-    <link rel="stylesheet" th:href="@{/resources/plugins/summernote/summernote-bs4.min.css}">
-    <!-- CodeMirror -->
-    <link rel="stylesheet" th:href="@{/resources/plugins/codemirror/codemirror.css}">
     <style>
-        .employers-details-area .container {
-            padding-top: 10px;
+        .page-header-area {
+            padding: 150px 0 30px;
         }
 
-        .employers-details-item {
-            margin-right: 40px;
+        .team-details-area .container {
+            padding-top: 50px;
+            padding-bottom: 50px;
         }
 
-        .note-editor.note-frame .note-statusbar .note-resizebar {
-            display: none;
+        .team-details-btn .btn-theme {
+            height: 40px;
         }
-        .note-editor .note-toolbar {
-            display: none;
+
+        .team-details-wrap {
+            padding: 10px;
+        }
+
+        .footer-main {
+            padding: 50px 0 50px;
+        }
+
+        .footer-area .widget-title {
+            font-size: 24px;
+        }
+
+        .footer-area .widget-title {
+            margin-bottom: 30px;
+        }
+
+        .footer-area .nav-menu li a {
+            font-size: 17px;
         }
     </style>
 </head>
@@ -64,12 +77,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-header-content">
-                            <h2 class="title">Thông Tin Gia Sư</h2>
+                            <h2 class="title">Xác Nhận Việc Làm</h2>
                             <nav class="breadcrumb-area">
                                 <ul class="breadcrumb justify-content-center">
                                     <li><a href="/">Trang Chủ</a></li>
                                     <li class="breadcrumb-sep">/</li>
-                                    <li>Gia Sư</li>
+                                    <li>Việc Làm</li>
                                 </ul>
                             </nav>
                         </div>
@@ -79,67 +92,109 @@
         </div>
         <!--== End Page Header Area Wrapper ==-->
 
-        <!--== Start Employers Details Area Wrapper ==-->
-        <section class="employers-details-area">
+        <!--== Start Team Details Area Wrapper ==-->
+        <section class="team-details-area">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="employers-details-wrap">
-                            <div class="employers-details-info">
+                        <div class="team-details-wrap">
+                            <div class="team-details-info">
                                 <div class="thumb">
-                                    <img th:src="@{${tutorDTO.cardPhoto}}" width="130" height="130" alt="Image-HasTech">
+                                    <img th:src="@{/resources/front/img/1.webp}" width="130" height="130"
+                                         alt="Image-HasTech">
                                 </div>
                                 <div class="content">
-                                    <h4 class="title" th:text="${tutorDTO.fullName}"></h4>
+                                    <h4 class="title" th:text="${postDTO.fullName}"></h4>
+                                    <h5 class="sub-title" th:text="${postDTO.price} + ' VND'"></h5>
                                     <ul class="info-list">
-                                        <li><i class="icofont-location-pin" th:text="${tutorDTO.address}"></i></li>
-                                        <li><i class="icofont-phone" th:text="${tutorDTO.phone}"></i></li>
+                                        <li><i class="icofont-location-pin"></i><span
+                                                th:text="${postDTO.address}"></span></li>
+                                        <li><i class="icofont-phone"></i> <span th:text="${postDTO.phone}"></span></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="team-details-btn" th:if="${!postDTO.progress.equals('Lớp Chưa Giao')}">
+                                <a class="btn-theme" th:href="'/checkout-job/' + ${id} + '?action=confirm'">Xác Nhận
+                                    Việc Làm</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-7 col-xl-8">
-                        <div class="employers-details-item">
-                            <div class="content">
-                                <h4 class="title">Ưu Điểm</h4>
-                                <div class="form-group">
-                                    <textarea id="summernote" style="resize: none" readonly
-                                              th:field="*{tutorDTO.advantage}"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-xl-4">
-                        <div class="employers-sidebar">
+                    <div class="col-lg-5 col-xl-5">
+                        <div class="team-sidebar">
                             <div class="widget-item">
                                 <div class="widget-title">
-                                    <h3 class="title">Thông Tin</h3>
+                                    <h3 class="title">Thông tin việc làm</h3>
                                 </div>
                                 <div class="summery-info">
                                     <table class="table">
                                         <tbody>
                                         <tr>
-                                            <td class="table-name">Ngày Sinh</td>
+                                            <td class="table-name">Địa Chỉ</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.birthday}"></td>
+                                            <td th:text="${postDTO.address}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Nguyên Quán</td>
+                                            <td class="table-name">Lớp Dạy</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.origin}"></td>
+                                            <td th:text="${postDTO.teachingClassDTO.name}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Số CMND/CCCD</td>
+                                            <td class="table-name">Số Buổi</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.idNumber}"></td>
+                                            <td th:text="${postDTO.numberOfSession}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Trường Đào Tạo</td>
+                                            <td class="table-name">Thời Gian</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.school}"></td>
+                                            <td th:text="${postDTO.timeTeachingName}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Thông tin</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${postDTO.information}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Hình Thức</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${postDTO.mode}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Yêu Cầu</td>
+                                            <td class="dotted">:</td>
+                                            <td th:utext="${postDTO.requirement}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-xl-1"></div>
+                    <div class="col-lg-6 col-xl-6">
+                        <div class="team-sidebar">
+                            <div class="widget-item">
+                                <div class="widget-title">
+                                    <h3 class="title">Gia Sư</h3>
+                                </div>
+                                <div class="summery-info">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td class="table-name">Họ & Tên</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.fullName}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Số Điện Thoại</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.phone}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-name">Địa Chỉ</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.address}"></td>
                                         </tr>
                                         <tr>
                                             <td class="table-name">Trình Độ</td>
@@ -147,22 +202,17 @@
                                             <td th:text="${tutorDTO.level}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Ngành học</td>
+                                            <td class="table-name">Trường Đào Tạo</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.level}"></td>
+                                            <td th:text="${tutorDTO.school}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Niên Khóa</td>
+                                            <td class="table-name">Ngành học</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.yearCollege}"></td>
+                                            <td th:text="${tutorDTO.specialization}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a class="btn-theme" href="/change-profile/tutor">Thay Đổi Thông Tin</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +220,7 @@
                 </div>
             </div>
         </section>
-        <!--== End Employers Details Area Wrapper ==-->
+        <!--== End Team Details Area Wrapper ==-->
     </main>
 
     <!--== Start Footer Area Wrapper ==-->
@@ -208,22 +258,6 @@
 <!--=== jQuery Custom Js ===-->
 <script th:src="@{/resources/front/js/custom.js}"></script>
 
-<!-- Summernote -->
-<script th:src="@{/resources/plugins/summernote/summernote-bs4.min.js}"></script>
-<!-- CodeMirror -->
-<script th:src="@{/resources/plugins/codemirror/codemirror.js}"></script>
-
-<script>
-    $(function () {
-        // Summernote
-        $('#summernote').summernote()
-
-        // CodeMirror
-        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-            mode: "htmlmixed",
-            theme: "monokai"
-        });
-    })
-</script>
 </body>
+
 </html>

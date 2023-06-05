@@ -19,6 +19,14 @@
                                 <ul class="main-menu nav" th:if="${userLogin != null}">
                                     <li><a href="/home"><span>Home</span></a></li>
                                     <li class="has-submenu">
+                                        <a href="/front/post/"><span>Bài Đăng</span></a>
+                                        <ul class="submenu-nav">
+                                            <li th:if="${userLogin?.role == 'PARENT'}">
+                                                <a class="btn-registration" href="/front/post/form">Đăng Tìm Gia Sư</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
                                         <a href="#"><span th:text="${userLogin?.fullName}"></span></a>
                                         <ul class="submenu-nav">
                                             <li th:if="${userLogin?.role == 'TUTOR'}"><a class="btn-registration"
@@ -37,6 +45,7 @@
                                 </ul>
                                 <ul class="main-menu nav" th:if="${userLogin == null}">
                                     <li><a href="/home"><span>Home</span></a></li>
+                                    <li> <a href="/front/post/"><span>Bài Đăng</span></a></li>
                                     <li><a href="/login"><span>Đăng Nhập</span></a></li>
                                     <li class="has-submenu">
                                         <a href="#"><span>Đăng Ký</span></a>

@@ -55,6 +55,22 @@
         .note-editor.note-frame .note-statusbar{
             border: none;
         }
+        .employers-sidebar .widget-item{
+            background-color: #dadddd;
+        }
+        .page-header-area{
+            padding: 150px 0 30px;
+        }
+        .team-details-area .container{
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .team-details-btn .btn-theme{
+            height: 40px;
+        }
+        .team-details-wrap{
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -96,26 +112,25 @@
                         <div class="job-details-wrap">
                             <div class="job-details-info">
                                 <div class="thumb">
-                                    <img src="assets/img/companies/10.jpg" width="130" height="130" alt="Image-HasTech">
+                                    <img th:src="@{/resources/front/img/1.webp}" width="130" height="130" alt="Image-HasTech">
                                 </div>
                                 <div class="content">
                                     <h4 class="title" th:text="${postDTO.courseDTO.name}"></h4>
                                     <h5 class="sub-title" th:text="${postDTO.fullName}"></h5>
                                     <ul class="info-list">
                                         <li><i class="icofont-location-pin" th:text="${postDTO.address}"></i></li>
-                                        <li><i class="icofont-phone" th:text="${postDTO.courseDTO.name}"></i></li>
+                                        <li><i class="icofont-phone" th:text="${postDTO.phone}"></i></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="job-details-price">
                                 <h4 class="title" th:text="${postDTO.price} + ' VND/Tháng'"></h4>
-                                <button type="button" class="btn-theme">Đăng Ký Ngay</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-7 col-xl-8">
+                    <div class="col-lg-7 col-xl-7">
                         <div class="job-details-item">
                             <div class="content">
                                 <h4 class="title">Yêu Cầu</h4>
@@ -125,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-xl-4">
+                    <div class="col-lg-5 col-xl-5">
                         <div class="job-sidebar">
                             <div class="widget-item">
                                 <div class="widget-title">

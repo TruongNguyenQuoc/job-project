@@ -13,22 +13,29 @@ import com.project.tutoronline.model.mapper.TimeTeachingMapper;
 import com.project.tutoronline.service.*;
 import com.project.tutoronline.validator.PostValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/front/post")
 public class JobApplicationController {
 
     private static final String REDIRECT_URL = "/back/post";
+
+    private static final String POST_PENDING = "Đang Xét Duyệt";
+
+    private static final String POST_APPROVED = "Lớp Chưa Giao";
+
+    private static final int PAGE_SIZE = 12;
 
     @Autowired
     private PostService postService;
@@ -60,14 +67,35 @@ public class JobApplicationController {
     @Autowired
     private PostTimeTeachingMapper postTimeTeachingMapper;
 
+    @GetMapping(value = {"", "/"})
+    public String list(Model model,
+                       @RequestParam(value = "pageNumber", defaultValue = "1", required = false) int pageNumber) {
+        return listByPage(model, pageNumber);
+    }
+
+    @GetMapping("/page/{currentPage}")
+    public String listByPage(Model model, @PathVariable int currentPage) {
+        Pageable pageable = PageRequest.of(currentPage - 1, PAGE_SIZE);
+        Page<Post> postPageList = postService.findByPage(pageable);
+
+        List<Post> postList = postPageList.getContent().stream()
+                        .filter(post -> post.getProgress().equals(POST_APPROVED))
+                        .collect(Collectors.toList());
+        model.addAttribute("postDTOList", postMapper.toListDTO(postList));
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("pageTotal", postPageList.getTotalPages());
+        return "/front/job_list";
+    }
+
     @GetMapping(value = {"/form", "/form/"})
-    public String postHome(Model model, Authentication authentication) {
+    public String create(Model model, Authentication authentication) {
         CustomAccountDetails customAccountDetails = (CustomAccountDetails) authentication.getPrincipal();
         Account account = customAccountDetails.getAccount();
 
         Parent parent = parentService.findByAccount(account);
 
         PostDTO postDTO = new PostDTO();
+        postDTO.setPhone(account.getPhone());
         postDTO.setAccountId(account.getId());
         postDTO.setFullName(parent.getAccount().getFullName());
         model.addAttribute("messageDTO", null);
@@ -78,7 +106,7 @@ public class JobApplicationController {
         return "/front/job_post";
     }
 
-    @GetMapping("/form/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable long id) {
         Post post = postService.findById(id);
         List<PostTimeTeaching> postTimeTeachingList = postTimeTeachingService.findByPost(post);
@@ -101,7 +129,7 @@ public class JobApplicationController {
                 return "/front/job_post";
             } else {
                 // save
-                postDTO.setProgress("Đang Xét Duyệt");
+                postDTO.setProgress(POST_PENDING);
                 postDTO.setStatus(true);
                 Post post = postService.save(postMapper.toEntity(postDTO));
 
@@ -115,7 +143,7 @@ public class JobApplicationController {
                             postTimeTeachingService.save(postTimeTeachingMapper.toEntity(postTimeTeachingDTO));
                         });
                     }
-                    redirectUrl = "/front/post/form/" + post.getId() + "?action=save&status=success";
+                    redirectUrl = "/front/post/detail/" + post.getId() + "?action=save&status=success";
                 } else {
                     redirectUrl = "/front/post/form/" + "?action=error";
                 }
@@ -125,6 +153,16 @@ public class JobApplicationController {
         } catch (Exception ex) {
             return "redirect:" + REDIRECT_URL;
         }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable long id) {
+        Post post = postService.findById(id);
+        post.setStatus(false);
+        post.setProgress("Đã Hủy");
+        postService.save(post);
+        String redirectUrl = "/front/profile/parent";
+        return "redirect:" + redirectUrl;
     }
 
 }
