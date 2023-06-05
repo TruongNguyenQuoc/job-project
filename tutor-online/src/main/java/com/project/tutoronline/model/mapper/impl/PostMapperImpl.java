@@ -48,6 +48,7 @@ public class PostMapperImpl implements PostMapper {
         postDTO.setFullName(post.getFullName());
         postDTO.setPhone(post.getPhone());
         postDTO.setAddress(post.getAddress());
+        postDTO.setCode(post.getCode());
         postDTO.setPrice(ValidatorUtil.formatNumber(post.getPrice()));
         postDTO.setNumberOfSession(String.valueOf(post.getNumberOfSession()));
         postDTO.setInformation(post.getInformation());
@@ -118,6 +119,7 @@ public class PostMapperImpl implements PostMapper {
         post.setFullName(postDTO.getFullName());
         post.setPhone(postDTO.getPhone());
         post.setAddress(postDTO.getAddress());
+        post.setCode(postDTO.getCode());
         post.setPrice(ValidatorUtil.formatNumber(postDTO.getPrice()));
         post.setNumberOfSession(Integer.parseInt(postDTO.getNumberOfSession()));
         post.setInformation(postDTO.getInformation());

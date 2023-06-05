@@ -3,14 +3,14 @@ package com.project.tutoronline.controller.front;
 import com.project.tutoronline.model.dto.MessageDTO;
 import com.project.tutoronline.model.dto.PostDTO;
 import com.project.tutoronline.model.dto.PostTimeTeachingDTO;
-import com.project.tutoronline.model.entity.Account;
-import com.project.tutoronline.model.entity.Parent;
-import com.project.tutoronline.model.entity.Post;
-import com.project.tutoronline.model.entity.PostTimeTeaching;
+import com.project.tutoronline.model.dto.TutorDTO;
+import com.project.tutoronline.model.entity.*;
 import com.project.tutoronline.model.mapper.PostMapper;
 import com.project.tutoronline.model.mapper.PostTimeTeachingMapper;
 import com.project.tutoronline.model.mapper.TimeTeachingMapper;
+import com.project.tutoronline.model.mapper.TutorMapper;
 import com.project.tutoronline.service.*;
+import com.project.tutoronline.utils.RandomUtil;
 import com.project.tutoronline.validator.PostValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +34,12 @@ public class JobApplicationController {
     private static final String POST_PENDING = "Đang Xét Duyệt";
 
     private static final String POST_APPROVED = "Lớp Chưa Giao";
+
+    private static final String POST_CHECKING = "Đang Xác Nhận Gia Sư";
+
+    private static final String POST_COMPLETE = "Lớp Đã Giao";
+
+    private static final String POST_CANCER = "Đã Hủy";
 
     private static final int PAGE_SIZE = 12;
 
@@ -66,6 +72,12 @@ public class JobApplicationController {
 
     @Autowired
     private PostTimeTeachingMapper postTimeTeachingMapper;
+
+    @Autowired
+    private JobService jobService;
+
+    @Autowired
+    private TutorMapper tutorMapper;
 
     @GetMapping(value = {"", "/"})
     public String list(Model model,
@@ -106,9 +118,30 @@ public class JobApplicationController {
         return "/front/job_post";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable long id) {
+    @GetMapping("/from/{id}")
+    public String detail(Model model, @PathVariable long id, @RequestParam(required = false) String action) {
+        String redirectUrl = "";
         Post post = postService.findById(id);
+        Job job = jobService.findByPost(post);
+        if (post.getProgress().equals(POST_CHECKING)) {
+            TutorDTO tutorDTO = tutorMapper.toDTO(job.getTutor());
+            model.addAttribute("tutorDTO", tutorDTO);
+        }
+        if (action != null && action.equals("refuse")) {
+            post.setProgress(POST_APPROVED);
+            job.setStatus(false);
+            postService.save(post);
+            jobService.save(job);
+            redirectUrl = "/front/post/form/" + id;
+            return "redirect:" + redirectUrl;
+        }
+        if (action != null && action.equals("accept")) {
+            post.setProgress(POST_COMPLETE);
+            postService.save(post);
+            redirectUrl = "/front/post/form/" + id;
+            return "redirect:" + redirectUrl;
+        }
+
         List<PostTimeTeaching> postTimeTeachingList = postTimeTeachingService.findByPost(post);
         model.addAttribute("postDTO", postMapper.toDTO(post));
         model.addAttribute("postTimeTeachingList", postTimeTeachingMapper.toListDTO(postTimeTeachingList));
@@ -129,6 +162,8 @@ public class JobApplicationController {
                 return "/front/job_post";
             } else {
                 // save
+                String codeId = RandomUtil.generateId(postDTO.getId());
+                postDTO.setCode("BK" + codeId);
                 postDTO.setProgress(POST_PENDING);
                 postDTO.setStatus(true);
                 Post post = postService.save(postMapper.toEntity(postDTO));
@@ -159,7 +194,7 @@ public class JobApplicationController {
     public String delete(@PathVariable long id) {
         Post post = postService.findById(id);
         post.setStatus(false);
-        post.setProgress("Đã Hủy");
+        post.setProgress(POST_CANCER);
         postService.save(post);
         String redirectUrl = "/front/profile/parent";
         return "redirect:" + redirectUrl;
