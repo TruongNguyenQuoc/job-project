@@ -80,6 +80,7 @@ public class PostController {
 
             PostDTO postDTO = new PostDTO();
             postDTO.setAccountDTO(accountMapper.toDTO(account));
+            postDTO.setPhone(account.getPhone());
             postDTO.setAccountId(account.getId());
             model.addAttribute("messageDTO", null);
             model.addAttribute("postDTO", postDTO);

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Component
 public class PostMapperImpl implements PostMapper {
@@ -45,6 +46,7 @@ public class PostMapperImpl implements PostMapper {
         PostDTO postDTO = new PostDTO();
         postDTO.setId(post.getId());
         postDTO.setFullName(post.getFullName());
+        postDTO.setPhone(post.getPhone());
         postDTO.setAddress(post.getAddress());
         postDTO.setPrice(ValidatorUtil.formatNumber(post.getPrice()));
         postDTO.setNumberOfSession(String.valueOf(post.getNumberOfSession()));
@@ -81,11 +83,16 @@ public class PostMapperImpl implements PostMapper {
 
         List<PostTimeTeaching> postTimeTeachingList = postTimeTeachingService.findByPost(post);
         List<String> postTimeTeachingIdList = new ArrayList<>();
+        StringJoiner joinNames = new StringJoiner(", ");
         postTimeTeachingList.forEach(
-                element -> postTimeTeachingIdList.add(String.valueOf(element.getTimeTeaching().getId()))
+                element -> {
+                    postTimeTeachingIdList.add(String.valueOf(element.getTimeTeaching().getId()));
+                    joinNames.add(element.getTimeTeaching().getName());
+                }
         );
-        postDTO.setTimeTeachingId(postTimeTeachingIdList);
 
+        postDTO.setTimeTeachingId(postTimeTeachingIdList);
+        postDTO.setTimeTeachingName(joinNames.toString());
         return postDTO;
     }
 
@@ -109,6 +116,7 @@ public class PostMapperImpl implements PostMapper {
 
         post.setId(postDTO.getId());
         post.setFullName(postDTO.getFullName());
+        post.setPhone(postDTO.getPhone());
         post.setAddress(postDTO.getAddress());
         post.setPrice(ValidatorUtil.formatNumber(postDTO.getPrice()));
         post.setNumberOfSession(Integer.parseInt(postDTO.getNumberOfSession()));

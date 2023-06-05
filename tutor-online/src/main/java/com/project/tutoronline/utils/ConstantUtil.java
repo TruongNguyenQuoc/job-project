@@ -14,4 +14,6 @@ public class ConstantUtil {
 
     public static final String CORS_HOST = "http://localhost";
 
+    public static final String HOST_URL = "http://localhost:8080";
+
 }

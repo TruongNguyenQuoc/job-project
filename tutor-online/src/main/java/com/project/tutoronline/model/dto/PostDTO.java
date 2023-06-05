@@ -11,6 +11,7 @@ public class PostDTO {
 
     private long id;
     private String fullName;
+    private String phone;
     private String address;
     private String price;
     private String numberOfSession;
@@ -31,6 +32,7 @@ public class PostDTO {
     private CourseDTO courseDTO;
 
     private List<String> timeTeachingId;
+    private String timeTeachingName;
 
     private String startDate;
     private String endDate;

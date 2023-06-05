@@ -37,6 +37,14 @@ public class PostValidator implements Validator {
             }
         }
 
+        if (!ValidatorUtil.isNumeric(postDTO.getPhone())) {
+            errors.rejectValue("phone", "Số Điện Thoại phải là số",
+                    "Số Điện Thoại phải là số");
+        } else if (!ValidatorUtil.checkPhone(postDTO.getPhone())) {
+            errors.rejectValue("phone", "Số Điện Thoại phải có độ dài là 10!",
+                    "Số Điện Thoại phải có độ dài là 10!");
+        }
+
         if (ValidatorUtil.isEmpty(postDTO.getPrice())) {
             errors.rejectValue("price", "Vui lòng nhập Mức Lương!",
                     "Vui lòng nhập Mức Lương!");

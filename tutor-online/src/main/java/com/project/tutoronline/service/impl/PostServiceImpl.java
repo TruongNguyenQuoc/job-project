@@ -6,9 +6,13 @@ import com.project.tutoronline.model.entity.Post;
 import com.project.tutoronline.repository.PostRepository;
 import com.project.tutoronline.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -29,6 +33,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findByAccount(Account account) {
         return postRepository.findByAccount(account);
+    }
+
+    @Override
+    public Page<Post> findByPage(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
 
     @Override

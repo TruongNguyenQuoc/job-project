@@ -29,7 +29,7 @@ public class TutorValidator implements Validator {
     public void validate(Object target, Errors errors) {
         TutorDTO tutorDTO = (TutorDTO) target;
 
-        if (!ValidatorUtil.isNumeric(tutorDTO.getYearCollege1())) {
+        if (!ValidatorUtil.isNumeric(tutorDTO.getPhone())) {
             errors.rejectValue("phone", "Số Điện Thoại phải là số",
                     "Số Điện Thoại phải là số");
         } else if (!ValidatorUtil.checkPhone(tutorDTO.getPhone())) {

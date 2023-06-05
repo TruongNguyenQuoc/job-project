@@ -26,6 +26,9 @@ public class Post extends BaseEntity {
     @Column(name = "fullName")
     private String fullName;
 
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "address")
     private String address;
 
