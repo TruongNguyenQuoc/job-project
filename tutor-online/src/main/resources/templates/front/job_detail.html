@@ -36,6 +36,7 @@
         .employers-details-item {
             margin-right: 40px;
         }
+
         .login-register-form .form-control {
             height: 40px;
         }
@@ -43,37 +44,50 @@
         .note-editor.note-frame .note-editing-area .note-editable {
             width: 515px;
         }
+
         .note-editor.note-frame .note-statusbar .note-resizebar {
             display: none;
         }
-        .note-editor.note-frame{
+
+        .note-editor.note-frame {
             border: none;
         }
+
         .note-editor .note-toolbar {
             display: none;
         }
-        .note-editor.note-frame .note-statusbar{
+
+        .note-editor.note-frame .note-statusbar {
             border: none;
         }
-        .employers-sidebar .widget-item{
+
+        .employers-sidebar .widget-item {
             background-color: #dadddd;
         }
-        .page-header-area{
+
+        .page-header-area {
             padding: 150px 0 30px;
         }
-        .team-details-area .container{
+
+        .team-details-area .container {
             padding-top: 50px;
             padding-bottom: 50px;
         }
-        .team-details-btn .btn-theme{
+
+        .team-details-btn .btn-theme {
             height: 40px;
         }
-        .team-details-wrap{
+
+        .team-details-wrap {
             padding: 10px;
         }
+
         .team-details-btn .btn-theme.btn-light:hover {
             background-color: #e93737;
             border-color: #e93737;
+        }
+        .job-sidebar .summery-info .table tbody tr .table-name {
+            min-width: 95px;
         }
     </style>
 </head>
@@ -116,10 +130,12 @@
                         <div class="job-details-wrap">
                             <div class="job-details-info">
                                 <div class="thumb">
-                                    <img th:src="@{/resources/front/img/1.webp}" width="130" height="130" alt="Image-HasTech">
+                                    <img th:src="@{/resources/front/img/1.webp}" width="130" height="130"
+                                         alt="Image-HasTech">
                                 </div>
                                 <div class="content">
-                                    <h4 class="title" th:text="${postDTO.courseDTO.name}"></h4>
+                                    <h4 class="title" th:text="${postDTO.courseDTO.name}">
+                                    </h4>
                                     <h5 class="sub-title" th:text="${postDTO.fullName}"></h5>
                                     <ul class="info-list">
                                         <li><i class="icofont-location-pin" th:text="${postDTO.address}"></i></li>
@@ -129,9 +145,12 @@
                             </div>
                             <div class="job-details-price">
                                 <h4 class="title" th:text="${postDTO.price} + ' VND/Tháng'"></h4>
-                                <div class="team-details-btn" style="display: flex">
-                                    <a th:href="'/front/post/form/' + ${postDTO.id} + '?action=refuse'" class="btn-theme btn-light me-3">Từ Chối</a>
-                                    <a th:href="'/front/post/form/' + ${postDTO.id} + '?action=accept'"type="button" class="btn-theme">Chấp Nhận</a>
+                                <div class="team-details-btn" style="display: flex"
+                                     th:if="${tutorDTO != null && postDTO.progress == 'Đang Xác Nhận Gia Sư'}">
+                                    <a th:href="'/front/post/detail/' + ${postDTO.id} + '?action=refuse'"
+                                       class="btn-theme btn-light me-3">Từ Chối</a>
+                                    <a th:href="'/front/post/detail/' + ${postDTO.id} + '?action=accept'" type="button"
+                                       class="btn-theme">Chấp Nhận</a>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +159,7 @@
                 <div class="row">
                     <div class="col-lg-5 col-xl-5">
                         <div class="job-sidebar">
-                            <div class="widget-item">
+                            <div class="widget-item ms-0">
                                 <div class="widget-title">
                                     <h3 class="title">Chi Tiết</h3>
                                 </div>

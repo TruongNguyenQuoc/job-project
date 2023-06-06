@@ -134,10 +134,6 @@
                                                 <div class="alert alert-dismissible col-md-12"
                                                      th:if="${messageDTO != null && messageDTO.key == 'save'}"
                                                      th:classappend="${status == 'success' ? 'alert-success' : 'alert-warning'}">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                            aria-hidden="true">
-                                                        &times;
-                                                    </button>
                                                     <h5><i class="icon fas fa-exclamation-triangle"></i> Thông Báo</h5>
                                                     <span th:text="${messageDTO.value}"></span>
                                                 </div>

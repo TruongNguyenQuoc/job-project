@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Trang Chủ | Tutor Online</title>
+    <title>Gia Sư | Tutor Online</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
@@ -181,11 +181,6 @@
                                                 <i class="fas fa-eye"></i>
                                                 Xem
                                             </a>
-                                            <a class="btn btn-danger btn-sm"
-                                               th:href="@{'/back/parent/delete/' + ${item.id}}">
-                                                <i class="fa fa-trash"></i>
-                                                Hủy
-                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -228,19 +223,19 @@
                                             <td th:text="${tutorDTO.idNumber}"></td>
                                         </tr>
                                         <tr>
-                                            <td class="table-name">Trường Đào Tạo</td>
-                                            <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.school}"></td>
-                                        </tr>
-                                        <tr>
                                             <td class="table-name">Trình Độ</td>
                                             <td class="dotted">:</td>
                                             <td th:text="${tutorDTO.level}"></td>
                                         </tr>
                                         <tr>
+                                            <td class="table-name">Trường Đào Tạo</td>
+                                            <td class="dotted">:</td>
+                                            <td th:text="${tutorDTO.school}"></td>
+                                        </tr>
+                                        <tr>
                                             <td class="table-name">Ngành học</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.level}"></td>
+                                            <td th:text="${tutorDTO.specialization}"></td>
                                         </tr>
                                         <tr>
                                             <td class="table-name">Niên Khóa</td>
@@ -250,7 +245,7 @@
                                         <tr>
                                             <td class="table-name">Ưu Điểm</td>
                                             <td class="dotted">:</td>
-                                            <td th:text="${tutorDTO.advantage}"></td>
+                                            <td th:utext="${tutorDTO.advantage}"></td>
                                         </tr>
                                         </tbody>
                                     </table>

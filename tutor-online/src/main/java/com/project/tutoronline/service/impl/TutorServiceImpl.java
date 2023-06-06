@@ -2,17 +2,18 @@ package com.project.tutoronline.service.impl;
 
 import com.project.tutoronline.model.dto.AccountDTO;
 import com.project.tutoronline.model.dto.EmailTemplateDTO;
+import com.project.tutoronline.model.dto.FileDTO;
 import com.project.tutoronline.model.dto.TutorDTO;
 import com.project.tutoronline.model.entity.Account;
 import com.project.tutoronline.model.entity.Tutor;
 import com.project.tutoronline.repository.TutorRepository;
-import com.project.tutoronline.service.AccountService;
-import com.project.tutoronline.service.EmailService;
-import com.project.tutoronline.service.RoleService;
-import com.project.tutoronline.service.TutorService;
+import com.project.tutoronline.service.*;
+import com.project.tutoronline.utils.DateUtil;
+import com.project.tutoronline.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,9 +37,17 @@ public class TutorServiceImpl implements TutorService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private FileUploadService fileUploadService;
+
     @Override
     public List<Tutor> findAll() {
         return tutorRepository.findAll();
+    }
+
+    @Override
+    public List<Tutor> findByRandom(int limit) {
+        return tutorRepository.findByRandom(limit);
     }
 
     @Override
@@ -49,6 +58,46 @@ public class TutorServiceImpl implements TutorService {
     @Override
     public Tutor save(Tutor tutor) {
         return tutorRepository.save(tutor);
+    }
+
+    @Override
+    public Tutor save(Tutor tutor, TutorDTO tutorDTO) {
+        if (tutorDTO.getIdPhotoMul() != null && !ObjectUtils.isEmpty(tutorDTO.getIdPhotoMul().getOriginalFilename())) {
+            FileDTO fileDTOBack = fileUploadService.uploadFile(tutorDTO.getIdPhotoMul());
+            tutor.setIdPhoto(fileDTOBack.getPath());
+        }
+
+        if (tutorDTO.getCardPhotoMul() != null && !ObjectUtils.isEmpty(tutorDTO.getCardPhotoMul().getOriginalFilename())) {
+            FileDTO fileDTOBack = fileUploadService.uploadFile(tutorDTO.getCardPhotoMul());
+            tutor.setCardPhoto(fileDTOBack.getPath());
+        }
+
+        if (tutorDTO.getDegreePhotoMul() != null && !ObjectUtils.isEmpty(tutorDTO.getDegreePhotoMul().getOriginalFilename())) {
+            FileDTO fileDTOBack = fileUploadService.uploadFile(tutorDTO.getDegreePhotoMul());
+            tutor.setDegreePhoto(fileDTOBack.getPath());
+        }
+
+        tutor.setAddress(tutorDTO.getAddress());
+        tutor.setBirthday(DateUtil.convertStringToDate(tutorDTO.getBirthday(), "dd-MM-yyyy"));
+        tutor.setOrigin(tutorDTO.getOrigin());
+        tutor.setIdNumber(tutorDTO.getIdNumber());
+        tutor.setAdvantage(tutorDTO.getAdvantage());
+        tutor.setIdPhoto(tutorDTO.getIdPhoto());
+        tutor.setCardPhoto(tutorDTO.getCardPhoto());
+        tutor.setDegreePhoto(tutorDTO.getDegreePhoto());
+
+        tutor.setSchool(tutorDTO.getSchool());
+        tutor.setSpecialization(tutorDTO.getSpecialization());
+
+        if (ValidatorUtil.isEmpty(tutorDTO.getYearCollege())) {
+            tutor.setYearCollege(tutorDTO.getYearCollege1() + "-" +tutorDTO.getYearCollege2());
+        } else {
+            tutor.setYearCollege(tutorDTO.getYearCollege());
+        }
+
+        tutor.setLevel(tutorDTO.getLevel());
+
+        return tutor;
     }
 
     @Override

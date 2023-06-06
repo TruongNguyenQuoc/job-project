@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng Ký Gia Sư | Tutor Online</title>
+    <title>Thay Đổi Thông Tin | Tutor Online</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
@@ -39,10 +39,10 @@
 
     <div class="card">
         <div class="card-body register-card-body">
-            <p class="login-box-msg">ĐĂNG KÝ TÀI KHOẢN GIA SƯ</p>
+            <p class="login-box-msg">THAY ĐỔI THÔNG TIN GIA SƯ</p>
 
             <form enctype="multipart/form-data"
-                  th:action="@{/register/tutor}"
+                  th:action="@{/change-profile/tutor/}"
                   th:object="${tutorDTO}"
                   method="post">
                 <div class="row">
@@ -96,25 +96,6 @@
                                    required>
                             <p class="text-danger" th:if="${#fields.hasErrors('phone')}"
                                th:errors="*{phone}"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mật Khẩu</label>
-                            <input type="password" name="password" class="form-control"
-                                   id="password"
-                                   th:classappend="${#fields.hasErrors('accountDTO.password')} ? 'is-invalid' : ''"
-                                   th:field="*{accountDTO.password}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.password')}"
-                               th:errors="*{accountDTO.password}"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">Xác Nhận Mật Khẩu</label>
-                            <input type="password" name="confirmPassword"
-                                   class="form-control"
-                                   id="confirmPassword"
-                                   th:classappend="${#fields.hasErrors('accountDTO.confirmPassword')} ? 'is-invalid' : ''"
-                                   th:field="*{accountDTO.confirmPassword}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.confirmPassword')}"
-                               th:errors="*{accountDTO.confirmPassword}"></p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -178,15 +159,24 @@
                             <input type="file" class="form-control-file" name="idPhotoMul"
                                    accept="image/png, image/jpg, image/jpeg" id="idPhotoMul">
                         </div>
+                        <div th:if="${tutorDTO.cardPhoto != null }">
+                            <img th:src="@{${tutorDTO.cardPhoto}}" width="350px" />
+                        </div>
                         <div class="form-group">
                             <label for="cardPhotoMul">Ảnh Thẻ</label>
                             <input type="file" class="form-control-file" name="cardPhotoMul"
                                    accept="image/png, image/jpg, image/jpeg" id="cardPhotoMul">
                         </div>
+                        <div th:if="${tutorDTO.idPhoto != null }">
+                            <img th:src="@{${tutorDTO.idPhoto}}" width="350px" />
+                        </div>
                         <div class="form-group">
                             <label for="degreePhotoMul">Ảnh Bằng</label>
                             <input type="file" class="form-control-file" name="degreePhotoMul"
                                    accept="image/png, image/jpg, image/jpeg" id="degreePhotoMul">
+                        </div>
+                        <div th:if="${tutorDTO.degreePhoto != null }">
+                            <img th:src="@{${tutorDTO.degreePhoto}}" width="350px" />
                         </div>
                     </div>
                 </div>
@@ -202,17 +192,10 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Đăng Ký Gia Sư</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Thay Đổi Thông Tin</button>
                     </div>
                 </div>
             </form>
-
-            <p class="mb-1">
-                <a href="/forgot-password">Quên mật khẩu?</a>
-            </p>
-            <p class="mb-0">
-                <a href="/login" class="text-center">Bạn đã có tài khoản? Đăng nhập ngay!</a>
-            </p>
         </div>
     </div>
 
@@ -223,9 +206,9 @@
     <!-- AdminLTE App -->
     <script th:src="@{/resources/dist/js/adminlte.min.js}"></script>
     <!-- Summernote -->
-    <script  th:src="@{/resources/plugins/summernote/summernote-bs4.min.js}"></script>
+    <script th:src="@{/resources/plugins/summernote/summernote-bs4.min.js}"></script>
     <!-- CodeMirror -->
-    <script  th:src="@{/resources/plugins/codemirror/codemirror.js}"></script>
+    <script th:src="@{/resources/plugins/codemirror/codemirror.js}"></script>
 
     <script>
         (function () {

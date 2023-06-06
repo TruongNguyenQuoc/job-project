@@ -14,6 +14,8 @@ public interface PostService {
 
     Post findById(long id);
 
+    List<Post> findByRandom(int limit);
+
     List<Post> findByAccount(Account account);
 
     Page<Post> findByPage(Pageable pageable);

@@ -32,14 +32,13 @@ public class ParentMapperImpl implements ParentMapper {
         ParentDTO parentDTO = new ParentDTO();
         parentDTO.setId(parent.getId());
         parentDTO.setAddress(parent.getAddress());
+        parentDTO.setPhone(parent.getAccount().getPhone());
         parentDTO.setAvatar(parent.getAvatar());
         parentDTO.setStatus(parent.isStatus());
 
-        if (parent.getAccount() != null) {
-            AccountDTO accountDTO = accountMapper.toDTO(parent.getAccount());
-            parentDTO.setAccountDTO(accountDTO);
-            parentDTO.setAccountId(parent.getAccount().getId());
-        }
+        AccountDTO accountDTO = accountMapper.toDTO(parent.getAccount());
+        parentDTO.setAccountDTO(accountDTO);
+        parentDTO.setAccountId(parent.getAccount().getId());
 
         return parentDTO;
     }

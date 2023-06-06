@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tài Khoản | Tutor Online</title>
 
+    <!--== Favicon ==-->
+    <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -114,7 +116,6 @@
                                             <div class="form-group">
                                                 <label for="inputRole">Loại Tài Khoản</label>
                                                 <select class="form-control select2" id="inputRole" style="width: 100%;"
-                                                        th:classappend="${#fields.hasErrors('role')} ? 'is-invalid' : ''"
                                                         th:field="*{role}">
                                                     <option th:value="0">Chọn loại tài khoản...</option>
                                                     <option th:each="item : ${roleListDTO}"

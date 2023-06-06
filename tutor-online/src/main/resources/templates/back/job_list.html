@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Việc Làm | Tutor Online</title>
 
+    <!--== Favicon ==-->
+    <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -79,7 +81,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="item : ${jobList}">
-                                        <td th:text="${'#' + item.id}"></td>
+                                        <td th:text="${item.id}"></td>
                                         <td th:text="${item.postDTO.fullName}"></td>
                                         <td th:text="${item.postDTO.price + ' VND'}"></td>
                                         <td th:text="${item.tutorDTO.fullName}"></td>

@@ -18,4 +18,6 @@ public interface TutorTeachingClassService {
 
     TutorTeachingClass save(TutorTeachingClass tutorTeachingClass);
 
+    void delete(TutorTeachingClass tutorTeachingClass);
+
 }

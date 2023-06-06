@@ -51,6 +51,10 @@
         .footer-area .nav-menu li a {
             font-size: 17px;
         }
+        .recent-job-item .main-content .desc{
+            max-width: 100%;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -122,31 +126,36 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6 col-lg-4" th:each="item : ${postList}">
                         <!--== Start Recent Job Item ==-->
                         <div class="recent-job-item">
                             <div class="company-info">
                                 <div class="logo">
-                                    <a href="company-details.html"><img src="assets/img/companies/1.jpg" width="75"
-                                                                        height="75" alt="Image-HasTech"></a>
+                                    <span class="btn btn-warning" th:text="${item.code}" style="padding: 4px; "></span>
                                 </div>
-                                <div class="content">
-                                    <h4 class="name"><a href="company-details.html">Darkento Ltd.</a></h4>
-                                    <p class="address">New York, USA</p>
+                                <div class="content ms-1">
+                                    <h4 class="name mb-0" th:text="${item.fullName}"></h4>
                                 </div>
                             </div>
                             <div class="main-content">
-                                <h3 class="title"><a href="job-details.html">Front-end Developer</a></h3>
-                                <h5 class="work-type">Full-time</h5>
-                                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
+                                <h3 class="title" th:text="${item.courseDTO.name}"></h3>
+                                <h5 class="work-type">Hình Thức : <b><span th:text="${item.mode}"></span></b></h5>
+                                <p class="desc">Lớp : <b><span th:text="${item.teachingClassDTO.name}"></span></b></p>
+                                <p class="desc">Địa Chỉ : <b><span th:text="${item.address}"></span></b></p>
+                                <p class="desc">Thời Gian : <b><span th:text="${item.timeTeachingName}"></span></b></p>
+                                <p class="desc">Thông Tin : <b><span th:text="${item.information}"></span></b></p>
+                                <div class="desc"
+                                     th:utext="'Yêu Cầu : ' + ${item.requirement}"></div>
+                                <p class="desc">Liên Hệ : <b><span th:text="${item.phone}"></span></b></p>
                             </div>
-                            <div class="recent-job-info">
+                            <div class="recent-job-info mb-3" style="display: block">
                                 <div class="salary">
-                                    <h4>$5000</h4>
-                                    <p>/monthly</p>
+                                    <span class="me-2" style="font-size: 15px">Mức Lương</span>
+                                    <h6 th:text="${item.price} + ' VND'" class="mb-0 me-1"></h6>
+                                    <span>/Tháng</span>
                                 </div>
-                                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
                             </div>
+                            <a class="btn-theme btn-sm" th:href="'/checkout-job/' + ${item.id}">Đăng Ký Ngay</a>
                         </div>
                         <!--== End Recent Job Item ==-->
                     </div>
@@ -161,36 +170,24 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="title">Các Gia Sư Tốt</h3>
+                            <h3 class="title">Các Gia Sư</h3>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="col-sm-6 col-lg-4 col-xl-3" th:each="item : ${tutorList}">
                         <!--== Start Team Item ==-->
                         <div class="team-item">
                             <div class="thumb">
-                                <a href="candidate-details.html">
-                                    <img src="assets/img/team/1.jpg" width="160" height="160" alt="Image-HasTech">
+                                <a href="#">
+                                    <img th:src="@{${item.cardPhoto}}" width="160" height="160" alt="Image-HasTech">
                                 </a>
                             </div>
                             <div class="content">
-                                <h4 class="title"><a href="candidate-details.html">Lauran Benitez</a></h4>
-                                <h5 class="sub-title">Web Designer</h5>
-                                <div class="rating-box">
-                                    <i class="icofont-star"></i>
-                                    <i class="icofont-star"></i>
-                                    <i class="icofont-star"></i>
-                                    <i class="icofont-star"></i>
-                                    <i class="icofont-star"></i>
-                                </div>
-                                <p class="desc">CSS3, HTML5, Javascript Bootstrap, Jquery</p>
-                                <a class="btn-theme btn-white btn-sm" href="candidate-details.html">View Profile</a>
+                                <h4 class="title"><a href="#" th:text="${item.fullName}"></a></h4>
+                                <h5 class="sub-title" th:text="${item.school}"></h5>
+                                <p class="desc" th:text="${item.specialization}"></p>
                             </div>
-                            <div class="bookmark-icon"><img src="assets/img/icons/bookmark1.png" alt="Image-HasTech">
-                            </div>
-                            <div class="bookmark-icon-hover"><img src="assets/img/icons/bookmark2.png"
-                                                                  alt="Image-HasTech"></div>
                         </div>
                         <!--== End Team Item ==-->
                     </div>

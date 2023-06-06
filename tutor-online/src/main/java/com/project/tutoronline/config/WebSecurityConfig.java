@@ -62,11 +62,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors().configurationSource(request -> corsConfiguration);
 
         http.authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/resources/**","/images/**").permitAll()
                 .antMatchers("/", "/front/post/**", "/front/register/**", "/login/**", "/register/**", "/forgot-password/**").permitAll()
 
                 .antMatchers("/back/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/front/post/form/**").hasAnyAuthority( "PARENT")
+                .antMatchers("/front/post/detail/**").hasAnyAuthority( "PARENT")
                 .antMatchers("/checkout-job/**").hasAnyAuthority( "TUTOR")
                 .antMatchers("/front/**").hasAnyAuthority("TUTOR", "PARENT")
 

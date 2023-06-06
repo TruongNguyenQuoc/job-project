@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lớp Dạy | Tutor Online</title>
 
+    <!--== Favicon ==-->
+    <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -82,7 +84,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="item : ${teachingClassList}">
-                                        <td th:text="${'#' + item.id }"></td>
+                                        <td th:text="${item.id}"></td>
                                         <td th:text="${item.name}"></td>
                                         <td th:switch="${item.status}" class="text-center">
                                             <p class="badge badge-success" th:case="true">Kích Hoạt</p>

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng Ký Phụ Huynh | Tutor Online</title>
+    <title>Thay Đổi Thông Tin | Tutor Online</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" th:href="@{/resources/plugins/fontawesome-free/css/all.min.css}">
     <!-- icheck bootstrap -->
@@ -30,9 +31,9 @@
 
     <div class="card">
         <div class="card-body register-card-body">
-            <p class="login-box-msg">ĐĂNG KÝ TÀI KHOẢN PHỤ HUYNH</p>
+            <p class="login-box-msg">THAY ĐỔI THÔNG TIN PHỤ HUYNH</p>
 
-            <form th:action="@{/register/parent}"
+            <form th:action="@{/change-profile/parent}"
                   th:object="${parentDTO}"
                   method="post">
                 <div class="row">
@@ -66,25 +67,6 @@
                             <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.email')}"
                                th:errors="*{accountDTO.email}"></p>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Mật Khẩu</label>
-                            <input type="password" name="password" class="form-control"
-                                   id="password"
-                                   th:classappend="${#fields.hasErrors('accountDTO.password')} ? 'is-invalid' : ''"
-                                   th:field="*{accountDTO.password}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.password')}"
-                               th:errors="*{accountDTO.password}"></p>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">Xác Nhận Mật Khẩu</label>
-                            <input type="password" name="confirmPassword"
-                                   class="form-control"
-                                   id="confirmPassword"
-                                   th:classappend="${#fields.hasErrors('accountDTO.confirmPassword')} ? 'is-invalid' : ''"
-                                   th:field="*{accountDTO.confirmPassword}" required>
-                            <p class="text-danger" th:if="${#fields.hasErrors('accountDTO.confirmPassword')}"
-                               th:errors="*{accountDTO.confirmPassword}"></p>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -93,22 +75,15 @@
                     </div>
                 </div>
             </form>
-
-            <p class="mb-1">
-                <a href="/forgot-password">Quên mật khẩu?</a>
-            </p>
-            <p class="mb-0">
-                <a href="/login" class="text-center">Bạn đã có tài khoản? Đăng nhập ngay!</a>
-            </p>
         </div>
-</div>
+    </div>
 
-<!-- jQuery -->
-<script th:src="@{/resources/plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap 4 -->
-<script th:src="@{/resources/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- AdminLTE App -->
-<script th:src="@{/resources/dist/js/adminlte.min.js}"></script>
+    <!-- jQuery -->
+    <script th:src="@{/resources/plugins/jquery/jquery.min.js}"></script>
+    <!-- Bootstrap 4 -->
+    <script th:src="@{/resources/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/resources/dist/js/adminlte.min.js}"></script>
 
 </body>
 </html>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Phụ Huynh | Tutor Online</title>
 
+    <!--== Favicon ==-->
+    <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -84,7 +86,6 @@
                                             <div class="form-group">
                                                 <label for="inputId">Mã Phụ Huynh </label>
                                                 <input type="text" name="id" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''"
                                                        id="inputId" placeholder="..." th:field="*{id}" readonly>
                                                 <p class="text-danger" th:if="${#fields.hasErrors('id')}"
                                                    th:errors="*{id}"></p>
@@ -93,15 +94,13 @@
                                             <div class="form-group">
                                                 <label for="fullName">Tên Phụ Huynh </label>
                                                 <input type="text" name="fullName" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('fullName')} ? 'is-invalid' : ''"
                                                        id="fullName" placeholder="..." th:field="*{accountDTO.fullName}" readonly>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="phone">Số Điện Thoại</label>
                                                 <input type="text" name="phone" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : ''"
-                                                       id="phone" placeholder="..." th:field="*{phone}" readonly>
+                                                       id="phone" th:field="*{phone}" readonly>
                                             </div>
 
                                         </div>
@@ -109,9 +108,14 @@
                                         <div class="col-md-6">
 
                                             <div class="form-group">
+                                                <label for="username">Tài Khoản</label>
+                                                <input type="text" name="username" class="form-control"
+                                                       id="username" placeholder="..." th:field="*{accountDTO.username}" readonly>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="address">Địa Chỉ</label>
                                                 <input type="text" name="address" class="form-control"
-                                                       th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"
                                                        id="address" placeholder="..." th:field="*{address}" readonly>
                                             </div>
 
