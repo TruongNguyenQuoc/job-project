@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Trang Chủ | Tutor Online</title>
+    <title>Việc Làm | Tutor Online</title>
 
     <!--== Favicon ==-->
     <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.ico}" type="image/x-icon"/>
@@ -120,29 +120,27 @@
         <section class="recent-job-area recent-job-inner-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-lg-3" th:each="item : ${postDTOList}">
+                    <div class="col-md-6 col-lg-4" th:each="item : ${postDTOList}">
                         <!--== Start Recent Job Item ==-->
                         <div class="recent-job-item recent-job-style2-item">
                             <div class="company-info">
                                 <div class="logo">
-                                    <a href="/front/profile/parent"><img th:src="@{/resources/front/img/1.webp}"
-                                                                         width="75"
-                                                                         height="75" alt="Image-HasTech"></a>
+                                    <span class="btn btn-warning" th:text="${item.code}" style="padding: 4px; "></span>
                                 </div>
-                                <div class="content">
-                                    <h4 class="name"><a href="/front/profile/parent" th:text="${item.fullName}"></a>
-                                    </h4>
+                                <div class="content ms-1">
+                                    <h4 class="name mb-0" th:text="${item.fullName}"></h4>
                                 </div>
                             </div>
                             <div class="main-content">
                                 <h3 class="title" th:text="${item.courseDTO.name}"></h3>
-                                <h5 class="work-type" th:text="'Hình Thức : ' + ${item.mode}"></h5>
-                                <p class="desc" th:text="'Lớp : ' + ${item.teachingClassDTO.name}"></p>
-                                <p class="desc" th:text="'Địa Chỉ : ' + ${item.address}"></p>
-                                <p class="desc" th:text="'Thời Gian : ' + ${item.timeTeachingName}"></p>
-                                <p class="desc" th:text="'Thông Tin : ' + ${item.information}"></p>
-                                <div class="desc" th:utext="'Yêu Cầu : ' + ${item.requirement}"></div>
-                                <p class="desc" th:text="'Liên Hệ : ' + ${item.phone}"></p>
+                                <h5 class="work-type">Hình Thức : <b><span th:text="${item.mode}"></span></b></h5>
+                                <p class="desc">Lớp : <b><span th:text="${item.teachingClassDTO.name}"></span></b></p>
+                                <p class="desc">Địa Chỉ : <b><span th:text="${item.address}"></span></b></p>
+                                <p class="desc">Thời Gian : <b><span th:text="${item.timeTeachingName}"></span></b></p>
+                                <p class="desc">Thông Tin : <b><span th:text="${item.information}"></span></b></p>
+                                <div class="desc"
+                                     th:utext="'Yêu Cầu : ' + ${item.requirement}"></div>
+                                <p class="desc">Liên Hệ : <b><span th:text="${item.phone}"></span></b></p>
                             </div>
                             <div class="recent-job-info mb-3" style="display: block">
                                 <div class="salary">

@@ -40,4 +40,9 @@ public class TutorTeachingClassServiceImpl implements TutorTeachingClassService 
     public TutorTeachingClass save(TutorTeachingClass tutorTeachingClass) {
         return teachingClassRepository.save(tutorTeachingClass);
     }
+
+    @Override
+    public void delete(TutorTeachingClass tutorTeachingClass) {
+        teachingClassRepository.delete(tutorTeachingClass);
+    }
 }

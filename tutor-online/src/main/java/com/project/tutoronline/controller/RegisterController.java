@@ -153,7 +153,7 @@ public class RegisterController {
     @PostMapping(value = {"/tutor/", "/tutor"})
     public String registerTutor(Model model, @Valid TutorDTO tutorDTO, BindingResult bindingResult) {
         try {
-            String redirectUrlSuccess;
+            String redirectUrlSuccess = "";
             // validate
             tutorValidator.validate(tutorDTO, bindingResult);
             if (!bindingResult.hasErrors()) {
@@ -210,7 +210,7 @@ public class RegisterController {
     @PostMapping(value = {"/parent/", "/parent"})
     public String registerParent(Model model, @Valid ParentDTO parentDTO, BindingResult bindingResult) {
         try {
-            String redirectUrlSuccess;
+            String redirectUrlSuccess = "";
             // validate
             parentValidator.validate(parentDTO, bindingResult);
 

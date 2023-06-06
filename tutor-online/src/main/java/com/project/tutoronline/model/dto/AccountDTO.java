@@ -13,6 +13,7 @@ public class AccountDTO {
     private String fullName;
     private String password;
     private String email;
+    private String phone;
     private boolean status;
 
     private RoleDTO roleDTO;

@@ -41,7 +41,7 @@ public class JobApplicationController {
 
     private static final String POST_CANCER = "Đã Hủy";
 
-    private static final int PAGE_SIZE = 12;
+    private static final int PAGE_SIZE = 9;
 
     @Autowired
     private PostService postService;
@@ -118,12 +118,12 @@ public class JobApplicationController {
         return "/front/job_post";
     }
 
-    @GetMapping("/from/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable long id, @RequestParam(required = false) String action) {
         String redirectUrl = "";
         Post post = postService.findById(id);
         Job job = jobService.findByPost(post);
-        if (post.getProgress().equals(POST_CHECKING)) {
+        if (post.getProgress().equals(POST_CHECKING) || post.getProgress().equals(POST_COMPLETE)) {
             TutorDTO tutorDTO = tutorMapper.toDTO(job.getTutor());
             model.addAttribute("tutorDTO", tutorDTO);
         }
@@ -132,13 +132,13 @@ public class JobApplicationController {
             job.setStatus(false);
             postService.save(post);
             jobService.save(job);
-            redirectUrl = "/front/post/form/" + id;
+            redirectUrl = "/front/post/detail/" + id;
             return "redirect:" + redirectUrl;
         }
         if (action != null && action.equals("accept")) {
             post.setProgress(POST_COMPLETE);
             postService.save(post);
-            redirectUrl = "/front/post/form/" + id;
+            redirectUrl = "/front/post/detail/" + id;
             return "redirect:" + redirectUrl;
         }
 
@@ -156,14 +156,17 @@ public class JobApplicationController {
             postValidator.validate(postDTO, bindingResult);
 
             if (bindingResult.hasErrors()) {
+                model.addAttribute("courseListDTO", courseService.findAll());
+                model.addAttribute("timeTeachingListDTO", timeTeachingMapper.toListDTO(timeTeachingService.findAll()));
+                model.addAttribute("teachingClassListDTO", teachingClassService.findAll());
                 model.addAttribute("status", "warning");
                 model.addAttribute("messageDTO", new MessageDTO("save",
                         "Vui lòng kiểm tra lại thông tin!"));
                 return "/front/job_post";
             } else {
                 // save
-                String codeId = RandomUtil.generateId(postDTO.getId());
-                postDTO.setCode("BK" + codeId);
+                String codeId = RandomUtil.generateId(5);
+                postDTO.setCode("BK " + codeId);
                 postDTO.setProgress(POST_PENDING);
                 postDTO.setStatus(true);
                 Post post = postService.save(postMapper.toEntity(postDTO));
@@ -178,9 +181,9 @@ public class JobApplicationController {
                             postTimeTeachingService.save(postTimeTeachingMapper.toEntity(postTimeTeachingDTO));
                         });
                     }
-                    redirectUrl = "/front/post/detail/" + post.getId() + "?action=save&status=success";
+                    redirectUrl = "/front/post/detail/" + post.getId();
                 } else {
-                    redirectUrl = "/front/post/form/" + "?action=error";
+                    redirectUrl = "/front/post/detail/" + "?action=error";
                 }
 
                 return "redirect:" + redirectUrl;

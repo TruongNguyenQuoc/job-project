@@ -31,6 +31,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> findByRandom(int limit) {
+        return postRepository.findByRandomAndProgress(limit, "Lớp Chưa Giao");
+    }
+
+    @Override
     public List<Post> findByAccount(Account account) {
         return postRepository.findByAccount(account);
     }

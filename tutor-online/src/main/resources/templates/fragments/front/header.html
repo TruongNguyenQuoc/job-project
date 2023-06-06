@@ -8,7 +8,7 @@
                     <div class="header-align">
                         <div class="header-align-start">
                             <div class="header-logo-area">
-                                <a href="/home">
+                                <a href="/">
                                     <img class="logo-main" th:src="@{/resources/front/img/logo-light.png}" alt="Logo"/>
                                     <img class="logo-light" th:src="@{/resources/front/img/logo-light.png}" alt="Logo"/>
                                 </a>
@@ -17,9 +17,9 @@
                         <div class="header-align-center">
                             <div class="header-navigation-area position-relative">
                                 <ul class="main-menu nav" th:if="${userLogin != null}">
-                                    <li><a href="/home"><span>Home</span></a></li>
+                                    <li><a href="/"><span>Trang Chủ</span></a></li>
                                     <li class="has-submenu">
-                                        <a href="/front/post/"><span>Bài Đăng</span></a>
+                                        <a href="/front/post/"><span>Việc Làm</span></a>
                                         <ul class="submenu-nav">
                                             <li th:if="${userLogin?.role == 'PARENT'}">
                                                 <a class="btn-registration" href="/front/post/form">Đăng Tìm Gia Sư</a>
@@ -44,14 +44,14 @@
                                     </li>
                                 </ul>
                                 <ul class="main-menu nav" th:if="${userLogin == null}">
-                                    <li><a href="/home"><span>Home</span></a></li>
+                                    <li><a href="/"><span>Trang Chủ</span></a></li>
                                     <li> <a href="/front/post/"><span>Bài Đăng</span></a></li>
                                     <li><a href="/login"><span>Đăng Nhập</span></a></li>
                                     <li class="has-submenu">
                                         <a href="#"><span>Đăng Ký</span></a>
                                         <ul class="submenu-nav">
                                             <li><a class="btn-registration" href="/register/tutor">Đăng Ký Gia Sư</a></li>
-                                            <li><a class="btn-registration" href="/register/tutor">Đăng Ký Phụ Huynh</a></li>
+                                            <li><a class="btn-registration" href="/register/parent">Đăng Ký Phụ Huynh</a></li>
                                         </ul>
                                     </li>
                                 </ul>
